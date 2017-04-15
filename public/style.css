@@ -1,1 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
+
+#map {
+    height: 70vh;
+    width: 40vw;
+}
