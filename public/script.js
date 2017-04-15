@@ -55,7 +55,6 @@ $(document).ready(function() {
         placeMarker(arrayOfLocations[2], imageGuess)
         placeMarker(meanCenter, imageYrLoc)
 
-
     })
 
 
