@@ -24,7 +24,7 @@ function getMeanCenter(locations) {
     var sumY = 0
     var sumZ = 0
 
-    for (var i=0; i<latDeg.length; i++) {
+    for (var i=0; i<locations.length; i++) {
 
         var lat = dToR(locations[i].lat)
         var lng = dToR(locations[i].lng)
