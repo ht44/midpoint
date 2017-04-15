@@ -9,6 +9,7 @@ const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
 const app = express();
+// const usersRouter = require('./routes/users')
 
 require('locus');
 require('dotenv').load();
@@ -35,8 +36,10 @@ app.use(cookieSession({
 // Router middleware
 
 app.get('/', (req, res) => {
-  res.send('good to go');
+  res.render('statics/home', {apiKey: process.env.API_KEY});
 });
+
+// app.use('/users', usersRouter)
 
 app.listen(PORT, () => {
   console.log('Server listening on port', PORT);
