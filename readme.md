@@ -6,6 +6,6 @@ The application will need to know the longitude and latitude for each user parti
 
 Our API’s will include Google Places, Google Maps Geocoding and Google Maps.
 
-Our  technologies will include Bootstrap (or other front end framework for styling), Velocity, jQuery, HTML, CSS, Postgress, SQL, EJS, Express, Node.js, Javascript, Knex, API’s, Git and body-parser
+Our  technologies will include Bootstrap (or other front end framework for styling), jQuery, HTML, CSS, Postgress, SQL, EJS, Express, Node.js, Javascript, Knex, API’s, Git and body-parser
 
 Additional features will include a voting system, animated UI, built in chat client, weighting system, web socket, notification and mobile responsive.
