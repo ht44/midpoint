@@ -9,17 +9,21 @@ const request = require('supertest');
 const app = require('../../server');
 const expect = chai.expect;
 
-describe('Test:', () => {
-  it ('should connect to server', () => {
+describe('Integration Test:', () => {
+
+  it ('should connect to the server', () => {
     return request(app).get('/').then((res) => {
       expect(res.status).to.equal(200);
     });
   });
-  it ('should run on different port', () => {
-    expect(process.env.PORT).to.not.equal(undefined);
+
+  it ('should listen on an alternative port', () => {
     expect(process.env.PORT).to.not.equal('3000');
+    expect(process.env.PORT).to.not.equal(undefined);
   });
-  it ('should run in test environment', () => {
+
+  it ('should run in the test environment', () => {
     expect(process.env.NODE_ENV).to.equal('test');
   });
+
 });
