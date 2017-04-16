@@ -2,7 +2,7 @@
 
 var midpoint = (function () {
 
-  var arrayOfLocations = [{
+  var testLocations = [{
       lat: 30.271781,
       lng: -97.832315
   }, {
@@ -23,7 +23,7 @@ var midpoint = (function () {
 
   return {
 
-    test: arrayOfLocations,
+    test: testLocations,
 
     getMidpoint: locations => {
       var meanCenter = {},
@@ -60,11 +60,14 @@ var midpoint = (function () {
             lng: rToD(lngD)
         };
 
-        meanCenter.lat = rToD(latD),
-        meanCenter.lng = rToD(lngD)
+        meanCenter.lat = rToD(latD);
+        meanCenter.lng = rToD(lngD;
+
         return meanCenter;
       }
     }
 })();
 
-// module.exports = midpoint;
+// console.log(midpoint.getMidpoint(midpoint.test));
+
+module.exports = midpoint;

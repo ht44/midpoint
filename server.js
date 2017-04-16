@@ -1,18 +1,24 @@
 'use strict';
 
+require('locus');
+require('dotenv').load();
+
 const PORT = process.env.PORT || 3000;
 
+const midpoint = require('./public/math');
+// const mpTest = midpoint.getMidpoint(midpoint.test);
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
-const app = express();
-// const usersRouter = require('./routes/users')
+const request = require('request');
+const gClient = require('@google/maps').createClient({
+  key: process.env.API_KEY
+})
 
-require('locus');
-require('dotenv').load();
+const app = express();
 
 const secrets = [
   process.env.KEY_1,
@@ -37,6 +43,18 @@ app.use(cookieSession({
 
 app.get('/', (req, res) => {
   res.render('statics/home', {apiKey: process.env.API_KEY});
+});
+
+app.get('/hayden', (req, res) => {
+
+  // request(
+  //   `https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${process.env.API_KEY}&location=${mpTest.lat},${mpTest.lng}&radius=10000`,
+  //   (err, response, body) => {
+  //     // console.log('error:', err);
+  //     // console.log('statusCode:', response && response.statusCode);
+  //     res.send(body);
+  //   });
+  res.render('statics/hayden', {apiKey: process.env.API_KEY});
 });
 
 // app.use('/users', usersRouter)
