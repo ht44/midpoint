@@ -1,115 +1,151 @@
-$(document).ready(function() {
+function initMap() {
 
   var imageYrLoc = 'http://maps.google.com/mapfiles/kml/pal2/icon10.png';
   var imageGuess = 'http://maps.google.com/mapfiles/kml/pal4/icon53.png';
   var imagePano = 'http://maps.google.com/mapfiles/kml/pal4/icon61.png';
 
-  var map;
+  /////////////////////////////////////////////////////////////////////////////
 
-  var midpoint = (function () {
+  var meanCenter = midpoint.getMidpoint(midpoint.test);
+  var centerPin;
+  var myLocation;
+  var myPin;
+  var locations = [];
+  var userPins = [];
+  var placesPins = [];
+  var infoWindow;
 
-    var arrayOfLocations = [{
-        lat: 30.271781,
-        lng: -97.832315
-    }, {
-        lat: 30.571781,
-        lng: -97.632315
-    }, {
-        lat: 30.971781,
-        lng: -97.732315
-    }];
+  var map = new google.maps.Map(document.getElementById('map'), {
+      center: meanCenter,
+      zoom: 9,
+      mapTypeId: 'roadmap',
+      streetViewControl: false,
+      mapTypeControl: false
+  });
 
-    function dToR(degr) {
-      return degr * Math.PI / 180;
-    }
+  var locate = new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(position => {
+      resolve({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      });
+    });
+  }).then(location => {
+    var userId = '1'; // hard code until auth
+    meanCenter = location;
+    myLocation = location;
+    centerPin = dropPin(location, map, imagePano);
+    myPin = dropPin(location, map, imageYrLoc);
+    map.setCenter(location);
+    // ajax put @ server
+    var xhr = new XMLHttpRequest();
+    xhr.open('PUT', `http://localhost:3000/users/${userId}`);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(location));
+  });
 
-    function rToD(radians) {
-      return radians * 180 / Math.PI;
-    }
+  /////////////////////////////////////////////////////////////////////////////
 
-    return {
+  const addGroup = document.getElementById('add-group');
+  addGroup.addEventListener('click', (ev) => {
+    ev.preventDefault();
+    var groupId = document.getElementById('group-id').value
+    // ajax get @ server
+    var xhr = new XMLHttpRequest();
+    xhr.responseType = 'json';
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === 4) {
 
-      test: arrayOfLocations,
+        userPins.forEach(pin => {
+          pin.setMap(null);
+        });
+        centerPin.setMap(null);
+        userPins = [];
+        locations = [];
 
-      getMidpoint: locations => {
-        var meanCenter = {},
-            sumofX = 0,
-            sumofY = 0,
-            sumofZ = 0,
-            avgofX,
-            avgofY,
-            avgofZ,
-            latR,
-            lngR,
-            lngD,
-            hypD,
-            latD
-
-        locations.forEach(location => {
-          latR = dToR(location.lat);
-          lngR = dToR(location.lng);
-          sumofX += Math.cos(latR) * Math.cos(lngR);
-          sumofY += Math.cos(latR) * Math.sin(lngR);
-          sumofZ += Math.sin(latR);
+        xhr.response.forEach(result => {
+          locations.push({lat: parseFloat(result.current_lat), lng: parseFloat(result.current_lng)});
+          userPins.push(dropPin({lat: parseFloat(result.current_lat), lng: parseFloat(result.current_lng)}, map, imageGuess));
         });
 
-          avgofX = sumofX / locations.length
-          avgofY = sumofY / locations.length
-          avgofZ = sumofZ / locations.length
-
-          lngD = Math.atan2(avgofY, avgofX);
-          hypD = Math.sqrt(avgofX * avgofX + avgofY * avgofY);
-          latD = Math.atan2(avgofZ, hypD);
-
-          meanCenter = {
-              lat: rToD(latD),
-              lng: rToD(lngD)
-          };
-
-          meanCenter.lat = rToD(latD),
-          meanCenter.lng = rToD(lngD)
-          return meanCenter;
-        }
+        locations.push(myLocation);
+        meanCenter = midpoint.getMidpoint(locations);
+        centerPin = dropPin(meanCenter, map, imagePano);
+        map.setCenter(meanCenter);
       }
-  })();
+    };
+    xhr.open('GET', `http://localhost:3000/groups/${groupId}`);
+    xhr.send(null);
+  });
 
-  function placeMarker(location, markerFromSmwhr) {
-    var marker = new google.maps.Marker({
-      position: location,
-      map: map,
-      icon: markerFromSmwhr
+  ////////////////////////////////////////////////////////////////////////////
+
+  const placeSearch = document.getElementById('add-places');
+  placeSearch.addEventListener('click', (ev) => {
+
+    ev.preventDefault();
+    var placeType = document.getElementById('place-type').value || 'restaurant';
+    var searchRadius = document.getElementById('search-radius').value || 10000;
+
+    renderPlaces({
+      location: meanCenter,
+      type: placeType,
+      radius: searchRadius
+    });
+  });
+
+  /////////////////////////////////////////////////////////////////////////////
+
+  function dropPin(location, map, image, place) {
+    return new google.maps.Marker({
+        position: location,
+        map: map,
+        icon: image,
+        place: place
     });
   }
 
-  function newMap(midpoint, locations) {
+  /////////////////////////////////////////////////////////////////////////////
 
-      map = new google.maps.Map(document.getElementById('map'), {
-          center: midpoint,
-          zoom: 8,
-          mapTypeId: 'roadmap',
-          streetViewControl: false,
-          mapTypeControl: false
-      });
+  function renderPlaces(request) {
+    placesPins.forEach(pin => {
+      pin.setMap(null);
+    });
+    placesPins = [];
+    var service = new google.maps.places.PlacesService(map);
 
-      placeMarker(midpoint);
-      locations.forEach(location => {
-        placeMarker(location, imageGuess);
-      });
+    service.nearbySearch(request, (results, status) => {
+      if (status == google.maps.places.PlacesServiceStatus.OK) {
+        results.forEach(result => {
+
+          var marker = dropPin(null, map, null, {
+            placeId: result.place_id,
+            location: result.geometry.location
+          });
+
+          marker.addListener('click', () => {
+            if (infoWindow) {
+              infoWindow.close();
+            }
+            service.getDetails({placeId: result.place_id}, (details, status) => {
+              console.log(details);
+              infoWindow = new google.maps.InfoWindow({
+                content:
+                  '<div class="info">' +
+                  '<h1>' + details.name + '</h1>' +
+                  '<p>' + details.formatted_address + '</p>' +
+                  '<h1>' + details.formatted_phone_number + '</h1>' +
+                  '</div>',
+              });
+              infoWindow.open(map, marker);
+              map.addListener('click', () => {
+                infoWindow.close();
+              });
+            });
+          });
+          placesPins.push(marker);
+        });
+      }
+    });
   }
-
-  var testMidpoint = midpoint.getMidpoint(midpoint.test);
-  var testLocations = midpoint.test;
-
-  newMap(testMidpoint, testLocations);
-
-  // navigator.geolocation.getCurrentPosition(function(position) {
-  //
-  //     pos = {
-  //         lat: position.coords.latitude,
-  //         lng: position.coords.longitude
-  //     };
-  //
-  //     return pos
-  // })
-
-});
+};

@@ -67,6 +67,4 @@ var midpoint = (function () {
     }
 })();
 
-console.log(midpoint.getMidpoint(midpoint.test));
-
-module.exports = midpoint;
+// module.exports = midpoint;

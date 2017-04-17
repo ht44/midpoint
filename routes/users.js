@@ -1,8 +1,14 @@
+<<<<<<< HEAD
 'use strict'
+=======
+'use strict';
+
+>>>>>>> f91dce4783589f6ce3c053ea6cbf5018ebf02269
 const express = require('express');
 const knex = require('../db/knex');
 const router = express.Router();
 
+<<<<<<< HEAD
 router.route('/')
 //index all users ** for admin only **
 .get(function(req,res){
@@ -64,3 +70,13 @@ router.route('/:user_id/delete')
 
 
 module.exports=router;
+=======
+
+router.route('/:user_id')
+  .put((req, res) => {
+    console.log(req.body);
+    res.sendStatus(200);
+  });
+
+module.exports = router;
+>>>>>>> f91dce4783589f6ce3c053ea6cbf5018ebf02269
