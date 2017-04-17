@@ -15,6 +15,7 @@ const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
 const groupsRouter = require('./routes/groups');
 const usersRouter = require('./routes/users');
+const midpointRouter = require('./routes/midpoint');
 const request = require('request');
 const gClient = require('@google/maps').createClient({
   key: process.env.API_KEY
@@ -44,9 +45,10 @@ app.use(cookieSession({
 // Router middleware
 app.use('/users', usersRouter);
 app.use('/groups', groupsRouter);
+app.use('/midpoint', midpointRouter);
 
 app.get('/', (req, res) => {
-  res.render('statics/home', {apiKey: process.env.API_KEY});
+  res.render('statics/home');
 });
 
 app.listen(PORT, () => {

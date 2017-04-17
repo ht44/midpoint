@@ -65,7 +65,7 @@ function initMap() {
 
         xhr.response.forEach(result => {
           locations.push({lat: parseFloat(result.current_lat), lng: parseFloat(result.current_lng)});
-          userPins.push(dropPin({lat: parseFloat(result.current_lat), lng: parseFloat(result.current_lng)}, map));
+          userPins.push(dropPin({lat: parseFloat(result.current_lat), lng: parseFloat(result.current_lng)}, map, imageGuess));
         });
 
         locations.push(myLocation);
@@ -128,6 +128,7 @@ function initMap() {
               infoWindow.close();
             }
             service.getDetails({placeId: result.place_id}, (details, status) => {
+              console.log(details);
               infoWindow = new google.maps.InfoWindow({
                 content:
                   '<div class="info">' +
