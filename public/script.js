@@ -1,13 +1,96 @@
 function initMap() {
 
-  var testMidpoint = midpoint.getMidpoint(midpoint.test);
-  var testLocations = midpoint.test;
-
   var imageYrLoc = 'http://maps.google.com/mapfiles/kml/pal2/icon10.png';
   var imageGuess = 'http://maps.google.com/mapfiles/kml/pal4/icon53.png';
   var imagePano = 'http://maps.google.com/mapfiles/kml/pal4/icon61.png';
 
-  function placeMarker(location, map, image, place) {
+  /////////////////////////////////////////////////////////////////////////////
+
+  var meanCenter = midpoint.getMidpoint(midpoint.test);
+  var centerPin;
+  var myLocation;
+  var myPin;
+  var locations = [];
+  var userPins = [];
+  var placesPins = [];
+  var infoWindow;
+
+  var map = new google.maps.Map(document.getElementById('map'), {
+      center: meanCenter,
+      zoom: 9,
+      mapTypeId: 'roadmap',
+      streetViewControl: false,
+      mapTypeControl: false
+  });
+
+  var locate = new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(position => {
+      resolve({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      });
+    });
+  }).then(location => {
+    meanCenter = location;
+    myLocation = location;
+    centerPin = dropPin(location, map, imagePano);
+    myPin = dropPin(location, map, imageYrLoc);
+    map.setCenter(location);
+  });
+
+  /////////////////////////////////////////////////////////////////////////////
+
+  const addGroup = document.getElementById('add-group');
+  addGroup.addEventListener('click', (ev) => {
+    ev.preventDefault();
+
+    var groupId = document.getElementById('group-id').value
+    var xhr = new XMLHttpRequest();
+    xhr.responseType = 'json';
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === 4) {
+
+        userPins.forEach(pin => {
+          pin.setMap(null);
+        });
+        centerPin.setMap(null);
+        userPins = [];
+        locations = [];
+
+        xhr.response.forEach(result => {
+          locations.push({lat: parseFloat(result.current_lat), lng: parseFloat(result.current_lng)});
+          userPins.push(dropPin({lat: parseFloat(result.current_lat), lng: parseFloat(result.current_lng)}, map));
+        });
+
+        locations.push(myLocation);
+        meanCenter = midpoint.getMidpoint(locations);
+        centerPin = dropPin(meanCenter, map, imagePano);
+        map.setCenter(meanCenter);
+      }
+    };
+    xhr.open('GET', `http://localhost:3000/groups/${groupId}`);
+    xhr.send(null);
+  });
+
+  ////////////////////////////////////////////////////////////////////////////
+
+  const placeSearch = document.getElementById('add-places');
+  placeSearch.addEventListener('click', (ev) => {
+
+    ev.preventDefault();
+    var placeType = document.getElementById('place-type').value || 'restaurant';
+    var searchRadius = document.getElementById('search-radius').value || 10000;
+
+    renderPlaces({
+      location: meanCenter,
+      type: placeType,
+      radius: searchRadius
+    });
+  });
+
+  /////////////////////////////////////////////////////////////////////////////
+
+  function dropPin(location, map, image, place) {
     return new google.maps.Marker({
         position: location,
         map: map,
@@ -16,67 +99,46 @@ function initMap() {
     });
   }
 
-  function newMap(midpoint, locations, placeType, radius) {
+  /////////////////////////////////////////////////////////////////////////////
 
-      var request = {
-        location: midpoint,
-        radius: radius,
-        type: placeType
-      };
+  function renderPlaces(request) {
+    placesPins.forEach(pin => {
+      pin.setMap(null);
+    });
+    placesPins = [];
+    var service = new google.maps.places.PlacesService(map);
 
-      var map = new google.maps.Map(document.getElementById('map'), {
-          center: midpoint,
-          zoom: 8,
-          mapTypeId: 'roadmap',
-          streetViewControl: false,
-          mapTypeControl: false
-      });
+    service.nearbySearch(request, (results, status) => {
+      if (status == google.maps.places.PlacesServiceStatus.OK) {
+        results.forEach(result => {
 
-      var service = new google.maps.places.PlacesService(map);
-      // 1
-      placeMarker(midpoint, map, imagePano).addListener('click', () => {
-        console.log('hey');
-      });
+          var marker = dropPin(null, map, null, {
+            placeId: result.place_id,
+            location: result.geometry.location
+          });
 
-      // 2
-      locations.forEach(location => {
-          placeMarker(location, map, imageGuess).addListener('click', () => {
-            console.log('hi');
-          })
-      });
-
-      // 3
-      service.nearbySearch(request, (results, status) => {
-        if (status == google.maps.places.PlacesServiceStatus.OK) {
-          // var infowindow;
-
-          results.forEach(result => {
-
-            var marker = placeMarker(null, map, null, {
-              placeId: result.place_id,
-              location: result.geometry.location
-            })
-
-            marker.addListener('click', () => {
-              service.getDetails({placeId: result.place_id}, (details, status) => {
-                var infowindow = new google.maps.InfoWindow({
-                  content:
-                    '<div class="info">' +
-                    '<h1>' + details.name + '</h1>' +
-                    '<p>' + details.formatted_address + '</p>' +
-                    '<h1>' + details.formatted_phone_number + '</h1>' +
-                    '</div>',
-                });
-
-                infowindow.open(map, marker);
-                map.addListener('click', () => {
-                  infowindow.close();
-                });
+          marker.addListener('click', () => {
+            if (infoWindow) {
+              infoWindow.close();
+            }
+            service.getDetails({placeId: result.place_id}, (details, status) => {
+              infoWindow = new google.maps.InfoWindow({
+                content:
+                  '<div class="info">' +
+                  '<h1>' + details.name + '</h1>' +
+                  '<p>' + details.formatted_address + '</p>' +
+                  '<h1>' + details.formatted_phone_number + '</h1>' +
+                  '</div>',
+              });
+              infoWindow.open(map, marker);
+              map.addListener('click', () => {
+                infoWindow.close();
               });
             });
           });
-        }
-      });
-    }
-  newMap(testMidpoint, testLocations, 'gas_station', 10000);
+          placesPins.push(marker);
+        });
+      }
+    });
+  }
 };

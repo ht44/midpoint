@@ -4,15 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js" charset="utf-8"></script>
-    <script src="script.js" charset="utf-8"></script>
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=<%=apiKey%>"></script> -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%=apiKey%>&libraries=places"></script>
     <link rel="stylesheet" href="style.css">
-    </script>
+    <script src="math.js" charset="utf-8"></script>
+    <script src="script.js" charset="utf-8"></script>
+    <script async defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%=apiKey%>&libraries=places&callback=initMap"></script>
     <title>Document</title>
 </head>
 <body>
     <div id="map"></div>
+    <form id="controls" method="GET">
+      <input id="group-id" type="number" name="type" placeholder="Group Number">
+      <input id="add-group" type="submit" value="Add Group">
+    </form>
+    <form id="place-search" method="GET">
+      <input id="place-type" type="text" placeholder="Place Type">
+      <input id="search-radius" type="number" placeholder="Radius">
+      <input id="add-places" type="submit" value="Search">
+    </form>
 </body>
 </html>

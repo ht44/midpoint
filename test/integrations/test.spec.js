@@ -25,5 +25,4 @@ describe('Integration Test:', () => {
   it ('should run in the test environment', () => {
     expect(process.env.NODE_ENV).to.equal('test');
   });
-
 });

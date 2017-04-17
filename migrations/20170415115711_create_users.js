@@ -8,8 +8,8 @@ exports.up = function(knex, Promise) {
     t.string("first");
     t.string("last");
     t.string('img_url');
-    t.decimal("curren_lat");
-    t.decimal("curren_lng");
+    t.decimal("current_lat");
+    t.decimal("current_lng");
     t.decimal("home_lat");
     t.decimal("home_lng");
     t.decimal("work_lat");
