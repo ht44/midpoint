@@ -21,15 +21,19 @@ router.route('/')
     .post((req, res) => {
         var hash = bcrypt.hashSync(req.body.cred.password_digest, 10)
         req.body.cred.password_digest = hash
-        knex('users').insert(req.body.cred).then(result => {
-            res.send(result);
+        knex('users').insert(req.body.cred).returning('id','email').then(function(id){
+            res.redirect(`/users/${id}/edit`);
         }).catch(err => {
             console.log(err);
             res.send('didn\'t work');
         });
     });
+      router.route('/:user_id/edit')
+        .get((req,res)=>{
+            res.send('stringie againie')
 
-
+            });
+            
 router.route('/new')
     // SIGNUP PAGE
     .get((req, res) => {

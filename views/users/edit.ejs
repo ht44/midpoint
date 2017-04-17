@@ -1,0 +1,28 @@
+<!DOCTYPE>
+<html lang="en">
+<head>
+    <base href="/"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Profile Page</title>
+</head>
+<body>
+  <header>
+  </header>
+  <div class="content">
+    <form action="/users/<%= users.user_id %>?_method=PUT" method="POST">
+      <label>First Name</label>
+      <input name="user[first]" type="text" value="<%= user.name %>" />
+      <label>Last Name</label>
+      <input name="user[last]" type="text" value="<%= user.name %>" />
+      <label>Image</label>
+      <input name="user[image]" type="text" value="<%= user.img_url %>"/>
+      <label>Email Address</label>
+      <input name="user[email]" type="text" value="<%= user.email %>"/>
+      <label>snack rating</label>
+      <input type="submit" value="Edit User"/>
+    </form>
+  </div>
+</body>
+</html>
