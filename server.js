@@ -47,8 +47,7 @@ app.use('/auth', authRouter);
 
 // LOGIN PAGE
 app.get('/', (req, res) => {
-  res.render('statics/home');
-  // res.redirect('/midpoint');
+  res.render('auth/login');
 });
 
 app.listen(PORT, () => {
