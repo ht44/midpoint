@@ -5,8 +5,6 @@ require('dotenv').load();
 
 const PORT = process.env.PORT || 3000;
 
-const midpoint = require('./public/math');
-// const mpTest = midpoint.getMidpoint(midpoint.test);
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
@@ -17,9 +15,6 @@ const groupsRouter = require('./routes/groups');
 const usersRouter = require('./routes/users');
 const midpointRouter = require('./routes/midpoint');
 const request = require('request');
-const gClient = require('@google/maps').createClient({
-  key: process.env.API_KEY
-})
 
 const app = express();
 
@@ -48,7 +43,8 @@ app.use('/groups', groupsRouter);
 app.use('/midpoint', midpointRouter);
 
 app.get('/', (req, res) => {
-  res.render('statics/home');
+  // res.render('statics/home');
+  res.redirect('/midpoint');
 });
 
 app.listen(PORT, () => {
