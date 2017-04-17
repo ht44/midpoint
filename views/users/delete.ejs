@@ -9,7 +9,7 @@
 <body>
 <h1>Delete User</h1>
 <form action="/users/<%= user.id %>?_method=DELETE" method="POST">
-  <p>Are you sure you want to delete <%= user.id %>?</p>
+  <p>Are you sure you want to delete the user with this email:  <%= user.email %>?</p>
   <input type="submit" name="Delete User" />
 </form>
 </body>
