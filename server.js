@@ -11,10 +11,15 @@ const morgan = require('morgan');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
+<<<<<<< HEAD
+const app = express();
+const usersRouter = require('./routes/users')
+=======
 const groupsRouter = require('./routes/groups');
 const usersRouter = require('./routes/users');
 const midpointRouter = require('./routes/midpoint');
 const request = require('request');
+>>>>>>> f91dce4783589f6ce3c053ea6cbf5018ebf02269
 
 const app = express();
 
@@ -39,8 +44,11 @@ app.use(cookieSession({
 
 // Router middleware
 app.use('/users', usersRouter);
+<<<<<<< HEAD
+=======
 app.use('/groups', groupsRouter);
 app.use('/midpoint', midpointRouter);
+>>>>>>> f91dce4783589f6ce3c053ea6cbf5018ebf02269
 
 app.get('/', (req, res) => {
   // res.render('statics/home');
