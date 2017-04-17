@@ -14,6 +14,7 @@ const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
 const groupsRouter = require('./routes/groups');
+const usersRouter = require('./routes/users');
 const request = require('request');
 const gClient = require('@google/maps').createClient({
   key: process.env.API_KEY
@@ -41,25 +42,12 @@ app.use(cookieSession({
 }));
 
 // Router middleware
+app.use('/users', usersRouter);
 app.use('/groups', groupsRouter);
 
 app.get('/', (req, res) => {
   res.render('statics/home', {apiKey: process.env.API_KEY});
 });
-
-// app.get('/hayden', (req, res) => {
-
-  // request(
-  //   `https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${process.env.API_KEY}&location=${mpTest.lat},${mpTest.lng}&radius=10000`,
-  //   (err, response, body) => {
-  //     // console.log('error:', err);
-  //     // console.log('statusCode:', response && response.statusCode);
-  //     res.send(body);
-  //   });
-//   res.render('statics/hayden', {apiKey: process.env.API_KEY});
-// });
-
-// app.use('/users', usersRouter)
 
 app.listen(PORT, () => {
   console.log('Server listening on port', PORT);

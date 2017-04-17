@@ -22,7 +22,6 @@
     "supertest": "^3.0.0"
   },
   "dependencies": {
-    "@google/maps": "^0.3.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.1",
     "cookie-parser": "^1.4.3",

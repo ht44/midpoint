@@ -36,6 +36,11 @@ function initMap() {
     centerPin = dropPin(location, map, imagePano);
     myPin = dropPin(location, map, imageYrLoc);
     map.setCenter(location);
+    // AJAX PUT @ SERVER
+    var xhr = new XMLHttpRequest();
+    xhr.open('PUT', 'http://localhost:3000/users/${userId}');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(location));
   });
 
   /////////////////////////////////////////////////////////////////////////////
@@ -43,8 +48,8 @@ function initMap() {
   const addGroup = document.getElementById('add-group');
   addGroup.addEventListener('click', (ev) => {
     ev.preventDefault();
-
     var groupId = document.getElementById('group-id').value
+    // AJAX GET @ SERVER
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
     xhr.onreadystatechange = () => {
