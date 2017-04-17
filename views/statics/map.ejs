@@ -11,6 +11,13 @@
     <title>Document</title>
 </head>
 <body>
+    <div>
+      <% if (locals.currentUser) { %>
+        <form action="/auth/logout" method="GET">
+          <input type="submit" value="Logout">
+        </form>
+      <% } %>
+    </div>
     <div id="map"></div>
     <form id="controls" method="GET">
       <input id="group-id" type="number" name="type" placeholder="Group Number">

@@ -11,6 +11,7 @@ const morgan = require('morgan');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
+const setUser = require('./middleware/set_user');
 const usersRouter = require('./routes/users')
 const groupsRouter = require('./routes/groups');
 const midpointRouter = require('./routes/midpoint');
@@ -39,8 +40,12 @@ app.use(cookieSession({
   keys: secrets
 }));
 
+// Custom middleware
+app.use(setUser);
+
 // Router middleware
 app.use('/users', usersRouter);
+app.use('/users/:user_id/midpoint', midpointRouter);
 app.use('/groups', groupsRouter);
 app.use('/midpoint', midpointRouter);
 app.use('/auth', authRouter);
