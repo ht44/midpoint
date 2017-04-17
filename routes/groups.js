@@ -25,6 +25,4 @@ router.route('/:group_id')
     });
   });
 
-
-
 module.exports = router;
