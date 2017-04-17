@@ -29,13 +29,15 @@ const bcrypt = require('bcryptjs');
           //     res.send('didn\'t work');
           // });
     });
+
   router.route('/:user_id/edit')
   //
     .get((req,res)=>{
       knex('users')
       .where('id', req.params.user_id)
+      .first()
       .then(function(user) {
-          res.redirect('users/show', {
+          res.render('users/edit', {
               user
             // res.send('wow')
           })
@@ -85,16 +87,6 @@ const bcrypt = require('bcryptjs');
                 res.redirect('/users');
             });
     })
-
-<<<<<<< HEAD
-    // EDIT PROFILE / UPDATE LOCATION, RESPOND W STATUS CODE BC SENDING LATLNG
-    // .put((req, res) => {
-    //     console.log(req.body);
-    //     res.sendStatus(200);
-    // })
-
-=======
->>>>>>> 124d00a7278811a98905195eb219a4673349ff66
     .get(function(req, res) {
       console.log(req.header);
         knex('users')
