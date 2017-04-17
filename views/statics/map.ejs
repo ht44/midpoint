@@ -13,6 +13,7 @@
 <body>
     <div>
       <% if (locals.currentUser) { %>
+        <h1>Current User: <%=currentUser.email%></h1>
         <form action="/auth/logout" method="GET">
           <input type="submit" value="Logout">
         </form>
@@ -22,6 +23,10 @@
     <form id="controls" method="GET">
       <input id="group-id" type="number" name="type" placeholder="Group Number">
       <input id="add-group" type="submit" value="Add Group">
+    </form>
+    <form method="GET">
+      <input id="user-id" type="text" name="type" placeholder="User ID">
+      <input id="add-user" type="submit" value="Add User">
     </form>
     <form id="place-search" method="GET">
       <input id="place-type" type="text" placeholder="Place Type">

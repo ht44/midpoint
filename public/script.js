@@ -43,10 +43,10 @@ function initMap() {
         centerPin = dropPin(location, map, imagePano);
         myPin = dropPin(location, map, imageYrLoc);
         map.setCenter(location);
-
+        locations.push(location);
         // ajax put @ server
         var xhr = new XMLHttpRequest();
-        xhr.open('PUT', `http://localhost:3000/users/${userId}`);
+        xhr.open('PUT', `http://localhost:3000/locations/users/${userId}`);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify(location));
 
@@ -88,7 +88,37 @@ function initMap() {
                 map.setCenter(meanCenter);
             }
         };
-        xhr.open('GET', `http://localhost:3000/groups/${groupId}`);
+        xhr.open('GET', `http://localhost:3000/locations/groups/${groupId}`);
+        xhr.send(null);
+    });
+
+    const addUser = document.getElementById('add-user');
+    addUser.addEventListener('click', (ev) => {
+        ev.preventDefault();
+        var userId = document.getElementById('user-id').value
+        // ajax get @ server
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = 'json';
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4) {
+                centerPin.setMap(null);
+                locations.push({
+                  lat: parseFloat(xhr.response.current_lat),
+                  lng: parseFloat(xhr.response.current_lng)
+                });
+
+                userPins.push(dropPin({
+                    lat: parseFloat(xhr.response.current_lat),
+                    lng: parseFloat(xhr.response.current_lng)
+                }, map, imageGuess));
+
+                meanCenter = midpoint.getMidpoint(locations);
+                centerPin = dropPin(meanCenter, map, imagePano);
+                map.setCenter(meanCenter);
+            }
+        };
+        xhr.open('GET', `http://localhost:3000/locations/users/${userId}`);
+        // xhr.setRequestHeader('from', 'front');
         xhr.send(null);
     });
 

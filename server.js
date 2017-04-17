@@ -14,6 +14,7 @@ const cookieSession = require('cookie-session');
 const setUser = require('./middleware/set_user');
 const usersRouter = require('./routes/users')
 const groupsRouter = require('./routes/groups');
+const locationsRouter = require('./routes/locations');
 const midpointRouter = require('./routes/midpoint');
 const authRouter = require("./routes/auth");
 const request = require('request');
@@ -49,6 +50,7 @@ app.use('/users/:user_id/midpoint', midpointRouter);
 app.use('/groups', groupsRouter);
 app.use('/midpoint', midpointRouter);
 app.use('/auth', authRouter);
+app.use('/locations', locationsRouter);
 
 // LOGIN PAGE
 app.get('/', (req, res) => {
