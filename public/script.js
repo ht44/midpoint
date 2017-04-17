@@ -31,14 +31,15 @@ function initMap() {
       });
     });
   }).then(location => {
+    var userId = '1'; // hard code until auth
     meanCenter = location;
     myLocation = location;
     centerPin = dropPin(location, map, imagePano);
     myPin = dropPin(location, map, imageYrLoc);
     map.setCenter(location);
-    // AJAX PUT @ SERVER
+    // ajax put @ server
     var xhr = new XMLHttpRequest();
-    xhr.open('PUT', 'http://localhost:3000/users/${userId}');
+    xhr.open('PUT', `http://localhost:3000/users/${userId}`);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(location));
   });
@@ -49,7 +50,7 @@ function initMap() {
   addGroup.addEventListener('click', (ev) => {
     ev.preventDefault();
     var groupId = document.getElementById('group-id').value
-    // AJAX GET @ SERVER
+    // ajax get @ server
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
     xhr.onreadystatechange = () => {
