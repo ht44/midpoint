@@ -49,13 +49,8 @@ router.route('/:user_id')
             });
     })
 
-    // EDIT PROFILE / UPDATE LOCATION, RESPOND W STATUS CODE BC SENDING LATLNG
-    .put((req, res) => {
-        console.log(req.body);
-        res.sendStatus(200);
-    })
-
     .get(function(req, res) {
+      console.log(req.header);
         knex('users')
             .where('id', req.params.user_id)
             .first()
