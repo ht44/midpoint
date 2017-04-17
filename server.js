@@ -14,6 +14,7 @@ const cookieSession = require('cookie-session');
 const usersRouter = require('./routes/users')
 const groupsRouter = require('./routes/groups');
 const midpointRouter = require('./routes/midpoint');
+const authRouter = require("./routes/auth");
 const request = require('request');
 
 const app = express();
@@ -41,10 +42,12 @@ app.use(cookieSession({
 app.use('/users', usersRouter);
 app.use('/groups', groupsRouter);
 app.use('/midpoint', midpointRouter);
+app.use('/auth', authRouter);
 
+// LOGIN PAGE
 app.get('/', (req, res) => {
-  // res.render('statics/home');
-  res.redirect('/midpoint');
+  res.render('statics/home');
+  // res.redirect('/midpoint');
 });
 
 app.listen(PORT, () => {

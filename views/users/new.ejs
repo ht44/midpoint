@@ -2,9 +2,15 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Signup Page</title>
   </head>
   <body>
-    <div>getting real</div>
+    <h1>Signup Page</h1>
+    <form action="/users" method="POST">
+      <input type="text" name="cred[email]">
+      <input type="text" name="cred[password]">
+      <input type="submit" value="Create Account">
+    </form>
+
   </body>
 </html>
