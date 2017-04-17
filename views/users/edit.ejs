@@ -11,16 +11,16 @@
   <header>
   </header>
   <div class="content">
-    <form action="/users/<%= users.user_id %>?_method=PUT" method="POST">
-      <label>First Name</label>
-      <input name="user[first]" type="text" value="<%= user.name %>" />
-      <label>Last Name</label>
-      <input name="user[last]" type="text" value="<%= user.name %>" />
+    <form action="/users/<%=users.user_id%>?_method=PUT" method="POST">
+      <label>First</label>
+      <input name="user[first]" type="text" value="<%= user.first %>" />
+      <label>Last</label>
+      <input name="user[last]" type="text" value="<%= user.last %>" />
       <label>Image</label>
       <input name="user[image]" type="text" value="<%= user.img_url %>"/>
       <label>Email Address</label>
       <input name="user[email]" type="text" value="<%= user.email %>"/>
-      <label>snack rating</label>
+      <label>this is a thing</label>
       <input type="submit" value="Edit User"/>
     </form>
   </div>
