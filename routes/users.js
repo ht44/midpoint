@@ -32,11 +32,11 @@ router.route('/:user_id')
     res.redirect('/users');
   });
 })
+
 .put((req, res) => {
   console.log(req.body);
   res.sendStatus(200);
-});
-
+})
 
 .get(function(req,res){
   knex('users')
