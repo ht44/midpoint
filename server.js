@@ -9,7 +9,7 @@ const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
 const app = express();
-// const usersRouter = require('./routes/users')
+const usersRouter = require('./routes/users')
 
 require('locus');
 require('dotenv').load();
@@ -34,6 +34,7 @@ app.use(cookieSession({
 }));
 
 // Router middleware
+app.use('/users', usersRouter);
 
 app.get('/', (req, res) => {
   res.render('statics/home', {apiKey: process.env.API_KEY});

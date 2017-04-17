@@ -1,1 +1,14 @@
-
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>all users</title>
+  </head>
+  <body>
+    <ul>
+      <div><%users.forEach(function(user){ %></div>
+        <li>Username   <%=user.username%> <%=user.first%>  <%=user.last%></li>
+        <a href ="/users/<%=user.id%>/delete">Delete</a>
+    <%})%>
+  </body>
+</html>
