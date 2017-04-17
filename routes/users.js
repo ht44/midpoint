@@ -18,7 +18,12 @@ router.route('/')
 
     // AUTH POST TO CREATE NEW ACCOUNT
     .post((req, res) => {
-      res.send(req.body.cred)
+      knex('users').insert(req.body.cred).then(result => {
+        res.send(result);
+      }).catch(err => {
+        console.log(err);
+        res.send('didn\'t work');
+      });
     });
 
 
