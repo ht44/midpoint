@@ -9,6 +9,8 @@ router.route('/logout')
 
   .get((req, res) => {
     req.session = null;
+    delete res.locals.currentUser;
+    delete req.currentUser;
     res.redirect('/');
   });
 
