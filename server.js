@@ -17,6 +17,7 @@ const midpointRouter = require('./routes/midpoint');
 const authRouter = require("./routes/auth");
 const request = require('request');
 
+
 const app = express();
 
 const secrets = [

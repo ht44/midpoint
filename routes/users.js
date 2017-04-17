@@ -3,6 +3,7 @@
 const express = require('express');
 const knex = require('../db/knex');
 const router = express.Router();
+const bcrypt = require('bcryptjs');
 
 router.route('/')
     //index all users ** for admin only **
@@ -18,20 +19,22 @@ router.route('/')
 
     // AUTH POST TO CREATE NEW ACCOUNT
     .post((req, res) => {
-      knex('users').insert(req.body.cred).then(result => {
-        res.send(result);
-      }).catch(err => {
-        console.log(err);
-        res.send('didn\'t work');
-      });
+        var hash = bcrypt.hashSync(req.body.cred.password_digest, 10)
+        req.body.cred.password_digest = hash
+        knex('users').insert(req.body.cred).then(result => {
+            res.send(result);
+        }).catch(err => {
+            console.log(err);
+            res.send('didn\'t work');
+        });
     });
 
 
 router.route('/new')
-  // SIGNUP PAGE
-  .get((req, res) => {
-    res.render('users/new');
-  })
+    // SIGNUP PAGE
+    .get((req, res) => {
+        res.render('users/new');
+    })
 
 router.route('/:user_id')
 
