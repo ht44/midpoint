@@ -13,7 +13,7 @@
 <body>
     <div>
       <% if (locals.currentUser) { %>
-        <h1>Current User: <%=currentUser.id%></h1>
+        <h1>Current User: <%=currentUser.email%></h1>
         <form action="/auth/logout" method="GET">
           <input type="submit" value="Logout">
         </form>
