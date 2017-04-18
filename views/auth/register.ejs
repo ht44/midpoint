@@ -1,17 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <%- include('../partials/head'); %> 
+  <link href="style/auth.css" rel="stylesheet" type="text/css"/>
+  <title>Register | Midpoint</title>
 </head>
 <body>
-  <h1>Signup Page</h1>
-  <form action="/users" method="POST">
-    <input type="text" name="cred[email]">
-    <input type="text" name="cred[password_digest]">
-    <input type="submit" value="Create Account">
-  </form>
+  <div id="auth-container">
+    <div id="auth">
+      <h1>Welcome to Midpoint</h1>
+      <h2>Create an Account</h2>
+      <form action="/users" method="POST">
+        <div class="field">
+          <input type="text" name="cred[email]" placeholder="Email">
+        </div>
+        <div class="field">
+          <input type="password" name="cred[password_digest]" placeholder="Password">
+        </div>
+        <div class="field">
+          <button class="submit">Create Account</button>
+        </div>
+      </form>
+      <p>
+        <div>
+          Already have an account?
+        </div>
+        <div>
+          <a href="auth/login">Login here.</a>
+        </div>
+      </p>
+    </div>
+  </div>
 </body>
 </html>

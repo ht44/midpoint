@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <title>Dude!!!</title>
+    <%- include('../partials/head'); %>
+    <title><%= dude.first%>'s Profile | Midpoint</title>
   </head>
   <body>
-    <div>Dude is: <%= dude.first%></div>
-    <div>Dude's last name is: <%= dude.last%></div>
+    <%# TODO: replace static user id and 'test@test.com' with real user email %>
+    <%- include('../partials/navbar', {userId: 1, userEmail: 'test@test.com'}); %>
+    <section>
+      <h1><%= dude.first%>'s User Info</h1>
+      <div>First Name: <%= dude.first%></div>
+      <div>Last Name: <%= dude.last%></div>
+      <div>Email Address: <%= dude.email%></div>
+      <div>User Pic: <%= dude.img_url%></div>
+      <div>
+        <a href="users/<%= dude.id %>/edit">Edit User</a>
+      </div>
+    </section>
   </body>
 </html>

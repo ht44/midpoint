@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style.css">
+    <%- include('../partials/head'); %>
     <script src="math.js" charset="utf-8"></script>
     <script src="script.js" charset="utf-8"></script>
     <script async defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%=apiKey%>&libraries=places&callback=initMap"></script>
-    <title>Document</title>
+    <title>Home | Midpoint</title>
 </head>
 <body>
+    <%# TODO: replace static user id and 'test@test.com' with real user email %>
+    <%- include('../partials/navbar', {userId: 1, userEmail: 'test@test.com'}); %>
     <div>
       <% if (locals.currentUser) { %>
         <h1><%=currentUser.email%></h1>

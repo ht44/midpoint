@@ -1,28 +1,35 @@
 <!DOCTYPE>
 <html lang="en">
 <head>
-    <base href="/"/>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <%- include('../partials/head'); %>
     <title>Profile Page</title>
 </head>
 <body>
-  <header>
-  </header>
-  <div class="content">
+  <%# TODO: replace static user id and 'test@test.com' with real user email %>
+  <%- include('../partials/navbar', {userId: 1, userEmail: 'test@test.com'}); %>
+  <section class="content">
+    <h1>Edit User Info</h1>
     <form action="/users/<%=user.user_id%>?_method=PUT" method="POST">
-      <label>First</label>
-      <input name="user[first]" type="text" placeholder="<%= user.first %>" />
-      <label>Last</label>
-      <input name="user[last]" type="text" placeholder="<%= user.last %>" />
-      <label>Image</label>
-      <input name="user[image]" type="text" placeholder="<%= user.img_url %>"/>
-      <label>Email Address</label>
-      <input name="user[email]" type="text" placeholder="<%= user.email %>"/>
-      <label>this is a thing</label>
-      <input type="submit" value="Edit User"/>
+      <div class="field">
+        <label>First Name:</label>
+        <input name="user[first]" type="text" placeholder="<%= user.first %>" />
+      </div>
+      <div class="field">
+        <label>Last Name:</label>
+        <input name="user[last]" type="text" placeholder="<%= user.last %>" />
+      </div>
+      <div class="field">
+        <label>User Image:</label>
+        <input name="user[image]" type="text" placeholder="<%= user.img_url %>"/>
+      </div>
+      <div class="field">
+        <label>Email Address:</label>
+        <input name="user[email]" type="text" placeholder="<%= user.email %>"/>
+      </div>
+      <div class="field">
+        <button class="submit">Update User Info</button>
+      </div>
     </form>
-  </div>
+  </section>
 </body>
 </html>
