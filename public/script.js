@@ -56,12 +56,15 @@ function initMap() {
             newPlace.addListener('click', function() {
               closeWindow();
               service.getDetails({placeId: this.placeId}, (details, status) => {
+                console.log(details);
                 infowindow = new google.maps.InfoWindow({
                     content: '<div class="info">' +
                              '<h1>' + details.name + '</h1>' +
                              '<h3>' + details.rating + ' Stars</h3>' +
                              '<p>' + details.formatted_address + '</p>' +
                              '<h1>' + details.formatted_phone_number + '</h1>' +
+                             '<a:link:active>' + details.website + '</a>' +
+                             '<div id="bodyContent">'+
                              '</div>'
                            });
                 infowindow.open(map, newPlace);
@@ -214,7 +217,7 @@ function initMap() {
             icon: image
         });
     }
-    
+
     function closeWindow() {
       if (infowindow) {
         infowindow.close();

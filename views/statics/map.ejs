@@ -9,7 +9,7 @@
 </head>
 <body>
     <%# TODO: replace static user id and 'test@test.com' with real user email %>
-    <%- include('../partials/navbar', {userId: 1, userEmail: 'test@test.com'}); %>
+    <%- include('../partials/navbar'); %>
     <div>
       <% if (locals.currentUser) { %>
         <h1><%=currentUser.email%></h1>
