@@ -24,7 +24,7 @@ function initMap() {
     });
 
 
-    var ac = new google.maps.places.Autocomplete(document.getElementById('place-type'), {
+    var ac = new google.maps.places.Autocomplete(document.getElementById('place-search'), {
         types: ['establishment']
     });
 
@@ -124,7 +124,7 @@ function initMap() {
 
     ////////////////////////////////////////////////////////////////////////////
 
-    google.maps.event.addListener(ac, document.getElementById('place-type'), function() {
+    google.maps.event.addListener(ac, document.getElementById('place-search'), function() {
         var place = ac.getPlace();
     })
 
