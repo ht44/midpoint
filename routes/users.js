@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs');
 const request = require('request');
 require('dotenv').load()
 
-  router.route('/')
+router.route('/')
     //index all users ** for admin only **
     .get(function(req, res) {
         knex('users')
@@ -16,20 +16,18 @@ require('dotenv').load()
                     users
                 })
             })
-        // res.send('yomamma')
     })
 
     // AUTH POST TO CREATE NEW ACCOUNT
     .post((req, res) => {
         var hash = bcrypt.hashSync(req.body.cred.password_digest, 10)
         req.body.cred.password_digest = hash
-        knex('users').insert(req.body.cred).returning('id').then(function(id){
-            res.redirect(`/users/${id}/edit`);
+        knex('users').insert(req.body.cred).returning('id').then(function(id) {
+            console.log(id[0]);
+            console.log(typeof id[0]);
+            req.session.userId = id[0];
+            res.redirect(`/users/${id[0]}/edit`);
         })
-          // .catch(err => {
-          //     console.log(err);
-          //     res.send('didn\'t work');
-          // });
     });
 
   router.route('/:user_id/edit')
@@ -52,17 +50,14 @@ require('dotenv').load()
           // })
         })
         })
-  //}
-    // });
 
-
-  router.route('/new')
-          // SIGNUP PAGE
+router.route('/new')
+    // SIGNUP PAGE
     .get((req, res) => {
-              res.render('users/new');
+        res.render('users/new');
     })
 
-  router.route('/:user_id')
+router.route('/:user_id')
 
     .put((req, res) => {
       // console.log(req.body.user.address);
@@ -106,7 +101,7 @@ require('dotenv').load()
             });
     })
     .get(function(req, res) {
-      console.log(req.header);
+        console.log(req.header);
         knex('users')
             .where('id', req.params.user_id)
             .first()
@@ -117,7 +112,7 @@ require('dotenv').load()
             });
     });
 
-  router.route('/:user_id/delete')
+router.route('/:user_id/delete')
     .get(function(req, res) {
         knex('users')
             .select('id', 'email')
