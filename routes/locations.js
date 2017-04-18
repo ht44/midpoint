@@ -52,9 +52,9 @@ router.route('/users/:user_id')
   })
 
   .get(function(req, res) {
-      knex.select('id', 'current_lat', 'current_lng', 'email')
+      knex.select('id', 'username', 'current_lat', 'current_lng', 'email')
       .from('users')
-      .where('id', req.params.user_id).first().then(result => {
+      .where('username', req.params.user_id).first().then(result => {
         res.json(result);
       }).catch(err => {
           console.log(err);

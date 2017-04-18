@@ -153,8 +153,8 @@ function initMap() {
                     lat: parseFloat(xhr.response.current_lat),
                     lng: parseFloat(xhr.response.current_lng)
                 }, map, imageGuess);
-
                 newPin.userId = xhr.response.id;
+                
                 newPin.lat = parseFloat(xhr.response.current_lat);
                 newPin.lng = parseFloat(xhr.response.current_lng);
 
