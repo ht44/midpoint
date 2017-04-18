@@ -31,6 +31,9 @@ router.route('/')
     });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> eb8450d4187b91a454a234732aca29a3f33b3716
   router.route('/:user_id/edit')
   //
     .get((req,res)=>{
@@ -51,6 +54,7 @@ router.route('/')
           // })
         })
         })
+<<<<<<< HEAD
   //}
     // });
 =======
@@ -80,6 +84,8 @@ router.route('/:user_id/edit')
     });
 >>>>>>> d676d144c9d4cd16a0ba140a6dca1716ee74fe50
 
+=======
+>>>>>>> eb8450d4187b91a454a234732aca29a3f33b3716
 
 router.route('/new')
     // SIGNUP PAGE
@@ -91,6 +97,9 @@ router.route('/:user_id')
 
     .put((req, res) => {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> eb8450d4187b91a454a234732aca29a3f33b3716
       // console.log(req.body.user.address);
       knex('users')
           .update({
@@ -119,6 +128,7 @@ router.route('/:user_id')
             res.send(err);
           })
         })
+<<<<<<< HEAD
 =======
         // console.log(req.body.user.address);
         knex('users')
@@ -144,6 +154,8 @@ router.route('/:user_id')
             });
     })
 >>>>>>> d676d144c9d4cd16a0ba140a6dca1716ee74fe50
+=======
+>>>>>>> eb8450d4187b91a454a234732aca29a3f33b3716
 
 
     .delete((req, res) => {
