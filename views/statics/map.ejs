@@ -22,6 +22,7 @@
       <% } %>
     </div>
     <div id="map"></div>
+    <%- include('../partials/steps', {currentStep: 1}); %>
     <form id="controls" method="GET">
       <input id="group-id" type="number" name="type" placeholder="Group Number">
       <input id="add-group" type="submit" value="Load Group">
@@ -38,6 +39,5 @@
       <input id="group-name" type="text" placeholder="Group Name">
       <input id="save-group" type="submit" value="Save Group">
     </form>
-    <%- include('../partials/steps', {currentStep: 1}); %>
 </body>
 </html>
