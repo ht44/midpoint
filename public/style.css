@@ -33,6 +33,10 @@ form .field {
   margin-bottom: 10px;
 }
 
+form .field button {
+  margin-left: 152px;
+}
+
 h1, h2 {
   font-weight: normal;
   margin: 0;
@@ -43,6 +47,24 @@ input {
   font-size: 12px;
   padding: 20px;
   border: none;
+}
+
+section {
+  padding: 10px;
+}
+
+section button {
+  width: 300px;
+}
+
+section input {
+  border: 1px #ccc solid;
+  width: 300px;
+}
+
+section label {
+  display: inline-block;
+  width: 150px;
 }
 
 #map {

@@ -4,11 +4,14 @@ header {
 }
 
 #logo {
-  color: #1d0b71;
   float: left;
   font-weight: 700;
   letter-spacing: 5px;
   text-transform: uppercase;
+}
+
+#logo a {
+  color: #1d0b71;
 }
 
 #user {
