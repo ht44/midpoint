@@ -18,7 +18,8 @@ function initMap() {
         zoom: 9,
         mapTypeId: 'roadmap',
         streetViewControl: false,
-        mapTypeControl: false
+        mapTypeControl: false,
+        scrollwheel: false
     });
 
     var input = document.getElementById('search-box');
@@ -214,7 +215,7 @@ function initMap() {
             icon: image
         });
     }
-    
+
     function closeWindow() {
       if (infowindow) {
         infowindow.close();
