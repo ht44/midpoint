@@ -39,19 +39,19 @@ require('dotenv').load()
       .where('id', req.params.user_id)
       .first()
       .then(function(user) {
-        request(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${user.home_lat},${user.home_lng}&key=${process.env.API_KEY}`, function(error, response, body){
-          console.log('error:', error);
-          console.log('statuscode: ', response && response.statusCode);
-          // console.log('body: ', body);
-          var parsedBody = JSON.parse(body);
-          var renderedAddress = parsedBody.results[0].formatted_address;
-          user.address = renderedAddress;
-          console.log(user.address);
-          console.log(typeof user.address);
+        // request(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${user.home_lat},${user.home_lng}&key=${process.env.API_KEY}`, function(error, response, body){
+        //   console.log('error:', error);
+        //   console.log('statuscode: ', response && response.statusCode);
+        //   // console.log('body: ', body);
+        //   var parsedBody = JSON.parse(body);
+        //   var renderedAddress = parsedBody.results[0].formatted_address;
+          // user.address = renderedAddress;
+          // console.log(user.address);
+          // console.log(typeof user.address);
           res.render('users/edit', {
             user
             // res.send('wow')
-          })
+          // })
         })
         })
   //}
@@ -67,23 +67,27 @@ require('dotenv').load()
   router.route('/:user_id')
 
     .put((req, res) => {
+      // console.log(req.body.user.address);
       knex('users')
+
           .update({
             username:     req.body.user.username,
             first:        req.body.user.first,
             last:         req.body.user.last,
             img_url:      req.body.user.img_url,
-            current_lat:  req.body.user.current_lat,
-            current_lng:  req.body.user.current_lng,
-            home_lat:     req.body.user.home_lat,
-            home_lng:     req.body.user.home_lng,
-            work_lat:     req.body.user.work_lat,
-            work_lng:     req.body.user.work_lng
+            email:        req.body.user.email,
+            home_address: req.body.user.home_address
           })
+      // knex('users')
           .where({
             id: req.params.user_id
           })
+          // .first()
           .then(() => {
+            //this is where we convert an address to lat and long
+            // request(`https://maps.googleapis.com/maps/api/geocode/json?address=${req.body.user.home_address}&key=${process.env.API_KEY}`, function(error, response, body){
+
+            })
             res.redirect(`/users/${req.params.user_id}`);
           });
         })
