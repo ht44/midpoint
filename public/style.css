@@ -8,9 +8,14 @@ a {
   text-decoration: none;
   color: #00b1fd;
 }
+
 body {
   font-family: 'lato', sans-serif;
   margin: 0;
+}
+
+h1 {
+  font-family: 'Roboto', sans-serif;
 }
 
 body, html {
