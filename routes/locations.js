@@ -1,11 +1,19 @@
 'use strict';
 
-'use strict';
-
 const express = require('express');
 const knex = require('../db/knex');
 const router = express.Router();
 
+router.route('/users')
+  .put((req, res) => {
+    res.redirect(`/locations/users/${req.session.userId}`);
+  });
+
+router.route('/groups')
+  .post((req, res) => {
+    console.log(req.body);
+    res.sendStatus(200);
+  })
 
 router.route('/groups/:group_id')
 
@@ -14,14 +22,15 @@ router.route('/groups/:group_id')
     knex.select(
       // 'users_groups.group_id',
       // 'users_groups.user_id',
-      // 'users.username',
+      // 'users.img_url',
+      'users.email',
       'users.id',
       'users.current_lat',
       'users.current_lng'
     ).from('users_groups').join('users', function() {
       this.on('users_groups.group_id', '=', groupId)
       .andOn('users.id', '=', 'users_groups.user_id')
-    }).then(results => {
+    }).whereNot('users.id', req.currentUser.id).then(results => {
       console.log(results);
       res.json(results);
     });
@@ -30,15 +39,26 @@ router.route('/groups/:group_id')
 router.route('/users/:user_id')
 
   .put((req, res) => {
-      console.log(req.body);
-      res.sendStatus(200);
+      if (!req.session.isChanged && req.session.userId === req.currentUser.id) {
+        knex('users').where('id', req.currentUser.id).update({
+          current_lat: req.body.lat,
+          current_lng: req.body.lng
+        }).then(() => {
+          res.sendStatus(200);
+        });
+      } else {
+        console.log('nope');
+      }
   })
 
   .get(function(req, res) {
-    // console.log(req.header);
-      knex('users').where('id', req.params.user_id).first().then(result => {
+      knex.select('id', 'current_lat', 'current_lng', 'email')
+      .from('users')
+      .where('id', req.params.user_id).first().then(result => {
         res.json(result);
+      }).catch(err => {
+          console.log(err);
       });
-  })
+  });
 
 module.exports = router;

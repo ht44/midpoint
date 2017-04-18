@@ -10,3 +10,28 @@ function getCoordanits (adress, callback) {
         callback(coordinates)
     })
 }
+
+const placeSearch = document.getElementById('add-places');
+placeSearch.addEventListener('click', (ev) => {
+
+    ev.preventDefault();
+    var placeType = document.getElementById('place-type').value || 'restaurant';
+    var searchRadius = document.getElementById('search-radius').value || 10000;
+    // this will draw a Circle of radius needs to go somewhere else but need a break
+    //     new google.maps.Circle({
+    //     strokeColor: '#78f42a',
+    //     strokeOpacity: 0.5,
+    //     strokeWeight: 2,
+    //     fillColor: '#78f42a',
+    //     fillOpacity: 0.24,
+    //     map: map,
+    //     center: meanCenter,
+    //     radius: searchRadius * 1609.344 || 2* 1609.344
+    // })
+
+    renderPlaces({
+        location: meanCenter,
+        keyword: placeType,
+        radius: searchRadius * 1609.344
+    });
+});

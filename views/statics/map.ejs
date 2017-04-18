@@ -13,25 +13,31 @@
 <body>
     <div>
       <% if (locals.currentUser) { %>
-        <h1>Current User: <%=currentUser.email%></h1>
+        <h1><%=currentUser.email%></h1>
         <form action="/auth/logout" method="GET">
           <input type="submit" value="Logout">
+        </form>
+        <form action="/users/<%=currentUser.id%>" method="GET">
+          <input type="submit" value="Dashboard">
         </form>
       <% } %>
     </div>
     <div id="map"></div>
     <form id="controls" method="GET">
       <input id="group-id" type="number" name="type" placeholder="Group Number">
-      <input id="add-group" type="submit" value="Add Group">
+      <input id="add-group" type="submit" value="Load Group">
     </form>
     <form method="GET">
       <input id="user-id" type="text" name="type" placeholder="User ID">
-      <input id="add-user" type="submit" value="Add User">
+      <input id="add-user" type="submit" value="Load User">
+      <input id="remove-user" type="button" value="Delete User">
     </form>
-    <form method="GET">
-      <input id="place-search" type="text" placeholder="Place Type">
-      <input id="search-radius" type="number" placeholder="Radius">
-      <input id="add-places" type="submit" value="Search">
+    <form>
+      <input id="search-box" type="text" placeholder="Search Box">
+    </form>
+    <form method="POST">
+      <input id="group-name" type="text" placeholder="Group Name">
+      <input id="save-group" type="submit" value="Save Group">
     </form>
 </body>
 </html>
