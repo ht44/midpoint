@@ -30,6 +30,10 @@ router.route('/')
         })
     });
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> eb8450d4187b91a454a234732aca29a3f33b3716
   router.route('/:user_id/edit')
   //
     .get((req,res)=>{
@@ -50,6 +54,38 @@ router.route('/')
           // })
         })
         })
+<<<<<<< HEAD
+  //}
+    // });
+=======
+router.route('/:user_id/edit')
+    //
+    .get((req, res) => {
+        knex('users')
+            .where('id', req.params.user_id)
+            .first()
+            .then(function(user) {
+                // request(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${user.home_lat},${user.home_lng}&key=${process.env.API_KEY}`, function(error, response, body){
+                //   console.log('error:', error);
+                //   console.log('statuscode: ', response && response.statusCode);
+                //   // console.log('body: ', body);
+                //   var parsedBody = JSON.parse(body);
+                //   var renderedAddress = parsedBody.results[0].formatted_address;
+                // user.address = renderedAddress;
+                // console.log(user.address);
+                // console.log(typeof user.address);
+                res.render('users/edit', {
+                    user
+                    // res.send('wow')
+                    // })
+                })
+            })
+        //}
+    });
+>>>>>>> d676d144c9d4cd16a0ba140a6dca1716ee74fe50
+
+=======
+>>>>>>> eb8450d4187b91a454a234732aca29a3f33b3716
 
 router.route('/new')
     // SIGNUP PAGE
@@ -60,6 +96,10 @@ router.route('/new')
 router.route('/:user_id')
 
     .put((req, res) => {
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> eb8450d4187b91a454a234732aca29a3f33b3716
       // console.log(req.body.user.address);
       knex('users')
           .update({
@@ -88,6 +128,34 @@ router.route('/:user_id')
             res.send(err);
           })
         })
+<<<<<<< HEAD
+=======
+        // console.log(req.body.user.address);
+        knex('users')
+
+            .update({
+                username: req.body.user.username,
+                first: req.body.user.first,
+                last: req.body.user.last,
+                img_url: req.body.user.img_url,
+                email: req.body.user.email,
+                home_address: req.body.user.home_address
+            })
+            // knex('users')
+            .where({
+                id: req.params.user_id
+            })
+            // .first()
+            .then(() => {
+                //this is where we convert an address to lat and long
+                // request(`https://maps.googleapis.com/maps/api/geocode/json?address=${req.body.user.home_address}&key=${process.env.API_KEY}`, function(error, response, body){
+
+                res.redirect(`/users/${req.params.user_id}`);
+            });
+    })
+>>>>>>> d676d144c9d4cd16a0ba140a6dca1716ee74fe50
+=======
+>>>>>>> eb8450d4187b91a454a234732aca29a3f33b3716
 
 
     .delete((req, res) => {
