@@ -30,31 +30,26 @@ router.route('/')
         })
     });
 
-router.route('/:user_id/edit')
-    //
-    .get((req, res) => {
-        knex('users')
-            .where('id', req.params.user_id)
-            .first()
-            .then(function(user) {
-                // request(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${user.home_lat},${user.home_lng}&key=${process.env.API_KEY}`, function(error, response, body){
-                //   console.log('error:', error);
-                //   console.log('statuscode: ', response && response.statusCode);
-                //   // console.log('body: ', body);
-                //   var parsedBody = JSON.parse(body);
-                //   var renderedAddress = parsedBody.results[0].formatted_address;
-                // user.address = renderedAddress;
-                // console.log(user.address);
-                // console.log(typeof user.address);
-                res.render('users/edit', {
-                    user
-                    // res.send('wow')
-                    // })
-                })
-            })
-        //}
-    });
-
+  router.route('/:user_id/edit')
+  //
+    .get((req,res)=>{
+      knex('users')
+      .where('id', req.params.user_id)
+      .first()
+      .then(function(user) {
+        // request(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${user.home_lat},${user.home_lng}&key=${process.env.API_KEY}`, function(error, response, body){
+        //   console.log('error:', error);
+        //   console.log('statuscode: ', response && response.statusCode);
+        //   // console.log('body: ', body);
+        //   var parsedBody = JSON.parse(body);
+        //   var renderedAddress = parsedBody.results[0].formatted_address;
+          // user.address = renderedAddress;
+          // console.log(user.address);
+          // console.log(typeof user.address);
+          res.render('users/edit', {user});
+          // })
+        })
+        })
 
 router.route('/new')
     // SIGNUP PAGE
@@ -65,29 +60,34 @@ router.route('/new')
 router.route('/:user_id')
 
     .put((req, res) => {
-        // console.log(req.body.user.address);
-        knex('users')
+      // console.log(req.body.user.address);
+      knex('users')
+          .update({
+            // username:     req.body.user.username,
+            first:        req.body.user.first,
+            last:         req.body.user.last,
+            img_url:      req.body.user.img_url,
+            email:        req.body.user.email,
+            home_address: req.body.user.home_address
+          })
 
-            .update({
-                username: req.body.user.username,
-                first: req.body.user.first,
-                last: req.body.user.last,
-                img_url: req.body.user.img_url,
-                email: req.body.user.email,
-                home_address: req.body.user.home_address
-            })
-            // knex('users')
-            .where({
-                id: req.params.user_id
-            })
-            // .first()
-            .then(() => {
-                //this is where we convert an address to lat and long
-                // request(`https://maps.googleapis.com/maps/api/geocode/json?address=${req.body.user.home_address}&key=${process.env.API_KEY}`, function(error, response, body){
+          .where('id',  req.params.user_id)
 
-                res.redirect(`/users/${req.params.user_id}`);
-            });
-    })
+          // .first()
+          .then((user) => {
+            // console.log(user);
+            //this is where we convert an address to lat and long
+            // request(`https://maps.googleapis.com/maps/api/geocode/json?address=${user.home_address}&key=${process.env.API_KEY}`, function(error, response, body){
+            //   console.log('error ', error);
+            //   console.log('response ', response);
+            //   console.log('body ', body);
+            // })
+            res.redirect('/midpoint');
+            // res.send('this worked for edit')
+          }).catch(err => {
+            res.send(err);
+          })
+        })
 
 
     .delete((req, res) => {
