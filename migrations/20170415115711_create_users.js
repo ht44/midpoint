@@ -8,13 +8,13 @@ exports.up = function(knex, Promise) {
     t.string("first");
     t.string("last");
     t.string('img_url');
-    t.decimal("current_lat");
-    t.decimal("current_lng");
-    t.string("home_address")
-    t.decimal("home_lat");
-    t.decimal("home_lng");
-    t.decimal("work_lat");
-    t.decimal("work_lng");
+    t.decimal("current_lat", 9, 7);
+    t.decimal("current_lng", 9, 7);
+    t.string("home_adress");
+    t.decimal("home_lat", 9, 7);
+    t.decimal("home_lng", 9, 7);
+    t.decimal("work_lat", 9, 7);
+    t.decimal("work_lng", 9, 7);
     t.timestamps(true,true);
   });
 };
