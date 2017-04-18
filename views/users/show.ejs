@@ -9,12 +9,17 @@
     <%- include('../partials/navbar', {userId: 1, userEmail: 'test@test.com'}); %>
     <section>
       <h1><%= dude.first%>'s User Info</h1>
+      <h3>Primary Info</h3>
       <div>First Name: <%= dude.first%></div>
       <div>Last Name: <%= dude.last%></div>
       <div>Email Address: <%= dude.email%></div>
       <div>User Pic: <%= dude.img_url%></div>
+      <div>Home Address: <%= dude.home_address%></div>
       <div>
         <a href="users/<%= dude.id %>/edit">Edit User</a>
+      </div>
+      <div>
+        <h3><a href="users/<%= dude.id %>/groups">My Groups</a></h3>
       </div>
     </section>
   </body>
