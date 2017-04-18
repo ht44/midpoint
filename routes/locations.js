@@ -18,23 +18,25 @@ router.route('/groups')
 router.route('/groups/:group_id')
 
   .get((req, res) => {
-    var groupId = parseInt(req.params.group_id, 10);
-    knex.select(
-      // 'users_groups.group_id',
-      // 'users_groups.user_id',
-      // 'users.img_url',
-      'users.email',
-      'users.id',
-      'users.current_lat',
-      'users.current_lng'
-    ).from('users_groups').join('users', function() {
-      this.on('users_groups.group_id', '=', groupId)
-      .andOn('users.id', '=', 'users_groups.user_id')
-    }).whereNot('users.id', req.currentUser.id).then(results => {
-      console.log(results);
-      res.json(results);
-    });
-  });
+    var groupName = (req.params.group_id);
+    knex('groups').where('name', groupName)
+    .first()
+    .then((group)=>{
+        knex.select(
+          'users.email',
+          'users.id',
+          'users.current_lat',
+          'users.current_lng'
+        ).from('users_groups').join('users', function() {
+          this.on('users_groups.group_id', '=', group.id)
+          .andOn('users.id', '=', 'users_groups.user_id')
+        }).whereNot('users.id', req.currentUser.id).then(results => {
+          console.log(results);
+          res.json(results);
+        });
+      });
+    })
+
 
 router.route('/users/:user_id')
 
