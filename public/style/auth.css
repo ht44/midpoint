@@ -1,0 +1,29 @@
+/* this is the styles page for login and signup */
+
+#auth {
+  background-color: #1d0b71;
+  color: white;
+  padding: 50px 50px 30px 50px;
+  text-align: center;
+  width: 400px;
+}
+
+#auth button {
+  width: 100%;
+}
+
+#auth h2 {
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+#auth input {
+  width: 100%;
+}
+
+#auth-container {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+}
