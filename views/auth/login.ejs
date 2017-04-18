@@ -1,22 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+  <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
+  <link href="style.css" rel="stylesheet" type="text/css"/>
+  <link href="style/auth.css" rel="stylesheet" type="text/css"/>
+  <title>Login | Midpoint</title>
 </head>
 <body>
-  <h1>Login Page</h1>
-  
-  <form action="auth/login" method="POST">
-    <input type="text" name="cred[email]" placeholder="Email">
-    <input type="text" name="cred[password]" placeholder="Password">
-    <input type="submit" value="Login">
-  </form>
-
-  <form action="auth/register" method="GET">
-    <input type="submit" value="Create Account">
-  </form>
+  <div id="auth-container">
+    <div id="auth">
+      <h1>Welcome to Midpoint</h1>
+      <h2>Please login</h2>
+      <form action="auth/login" method="POST">
+        <div class="field">
+          <input type="text" name="cred[email]" placeholder="Email">
+        </div>
+        <div class="field">
+          <input type="password" name="cred[password]" placeholder="Password">
+        </div>
+        <div class="field">
+          <button class="submit">Login</button>
+        </div>
+      </form>
+      <p>
+        <div>
+          Don't have an account?
+        </div>
+        <div>
+          <a href="auth/register">Sign up here.</a>
+        </div>
+      </p>
+    </div>
+  </div>
+  <a href="auth/register">Sign up here.</a>
 </body>
 </html>
