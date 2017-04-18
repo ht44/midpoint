@@ -1,5 +1,50 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: #00b1fd;
+}
+body {
+  font-family: 'lato', sans-serif;
+  margin: 0;
+}
+
+body, html {
+  height: 100%;
+}
+
+button {
+  border: none;
+  font-size: 12px;
+  padding: 20px;
+  text-transform: uppercase;
+}
+
+button.submit {
+  background-color: #00b1fd;
+  color: #fff;
+}
+
+form .field {
+  margin-bottom: 10px;
+}
+
+h1, h2 {
+  font-weight: normal;
+  margin: 0;
+  padding: 0 0 20px 0;
+}
+
+input {
+  font-size: 12px;
+  padding: 20px;
+  border: none;
+}
+
 #map {
     height: 70vh;
     width: 40vw;
