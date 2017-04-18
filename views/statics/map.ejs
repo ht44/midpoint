@@ -9,7 +9,7 @@
 </head>
 <body>
     <%# TODO: replace static user id and 'test@test.com' with real user email %>
-    <%- include('../partials/navbar', {userId: 1, userEmail: 'test@test.com'}); %>
+    <%- include('../partials/navbar'); %>
     <div>
       <% if (locals.currentUser) { %>
         <h1><%=currentUser.email%></h1>
@@ -22,8 +22,9 @@
       <% } %>
     </div>
     <div id="map"></div>
+    <%- include('../partials/steps', {currentStep: 1}); %>
     <form id="controls" method="GET">
-      <input id="group-id" type="number" name="type" placeholder="Group Number">
+      <input id="group-id" type="text" name="type" placeholder="Group Name">
       <input id="add-group" type="submit" value="Load Group">
     </form>
     <form method="GET">
@@ -38,6 +39,5 @@
       <input id="group-name" type="text" placeholder="Group Name">
       <input id="save-group" type="submit" value="Save Group">
     </form>
-    <%- include('../partials/steps', {currentStep: 1}); %>
 </body>
 </html>
