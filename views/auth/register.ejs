@@ -1,35 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <%- include('../partials/head'); %> 
-  <link href="style/auth.css" rel="stylesheet" type="text/css"/>
-  <title>Register | Midpoint</title>
+    <%- include('../partials/head'); %>
+        <link href="style/auth.css" rel="stylesheet" type="text/css" />
+        <title>Register | Midpoint</title>
 </head>
+
 <body>
-  <div id="auth-container">
-    <div id="auth">
-      <h1>Welcome to Midpoint</h1>
-      <h2>Create an Account</h2>
-      <form action="/users" method="POST">
-        <div class="field">
-          <input type="text" name="cred[email]" placeholder="Email">
+    <div id="auth-container">
+        <div id="auth">
+            <h1>Welcome to Midpoint</h1>
+            <h2>Create an Account</h2>
+            <form action="/users" method="POST">
+                <div class="field">
+                    <input type="text" name="cred[email]" placeholder="Email">
+                </div>
+                <div class="field">
+                    <input type="password" name="cred[password_digest]" placeholder="Password">
+                </div>
+                <div class="field">
+                    <button class="submit">Create Account</button>
+                </div>
+            </form>
+            <p>
+                <div>
+                    Already have an account?
+                </div>
+                <div>
+                    <a href="auth/login">Login here.</a>
+                </div>
+            </p>
         </div>
-        <div class="field">
-          <input type="password" name="cred[password_digest]" placeholder="Password">
-        </div>
-        <div class="field">
-          <button class="submit">Create Account</button>
-        </div>
-      </form>
-      <p>
-        <div>
-          Already have an account?
-        </div>
-        <div>
-          <a href="auth/login">Login here.</a>
-        </div>
-      </p>
     </div>
-  </div>
 </body>
+
 </html>
