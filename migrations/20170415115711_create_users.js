@@ -10,7 +10,7 @@ exports.up = function(knex, Promise) {
     t.string('img_url');
     t.decimal("current_lat", 9, 7);
     t.decimal("current_lng", 9, 7);
-    t.string("home_adress");
+    t.string("home_address");
     t.decimal("home_lat", 9, 7);
     t.decimal("home_lng", 9, 7);
     t.decimal("work_lat", 9, 7);

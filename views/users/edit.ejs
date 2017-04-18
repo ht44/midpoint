@@ -9,7 +9,7 @@
   <%- include('../partials/navbar', {userId: 1, userEmail: 'test@test.com'}); %>
   <section class="content">
     <h1>Edit User Info</h1>
-    <form action="/users/<%=user.user_id%>?_method=PUT" method="POST">
+    <form action="/users/<%=user.id%>?_method=PUT" method="POST">
       <div class="field">
         <label>First Name:</label>
         <input name="user[first]" type="text" placeholder="<%= user.first %>" />
@@ -20,7 +20,7 @@
       </div>
       <div class="field">
         <label>User Image:</label>
-        <input name="user[image]" type="text" placeholder="<%= user.img_url %>"/>
+        <input name="user[img_url]" type="text" placeholder="<%= user.img_url %>"/>
       </div>
       <div class="field">
         <label>Email Address:</label>
