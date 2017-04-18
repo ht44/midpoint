@@ -27,7 +27,7 @@
       <input id="add-group" type="submit" value="Load Group">
     </form>
     <form method="GET">
-      <input id="user-id" type="text" name="type" placeholder="User ID">
+      <input id="user-id" type="text" name="type" placeholder="Username">
       <input id="add-user" type="submit" value="Load User">
       <input id="remove-user" type="button" value="Delete User">
     </form>
@@ -38,5 +38,6 @@
       <input id="group-name" type="text" placeholder="Group Name">
       <input id="save-group" type="submit" value="Save Group">
     </form>
+    <%- include('../partials/steps', {currentStep: 1}); %>
 </body>
 </html>

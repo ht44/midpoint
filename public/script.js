@@ -18,7 +18,8 @@ function initMap() {
         zoom: 9,
         mapTypeId: 'roadmap',
         streetViewControl: false,
-        mapTypeControl: false
+        mapTypeControl: false,
+        scrollwheel: false
     });
 
     var input = document.getElementById('search-box');
@@ -155,8 +156,8 @@ function initMap() {
                     lat: parseFloat(xhr.response.current_lat),
                     lng: parseFloat(xhr.response.current_lng)
                 }, map, imageGuess);
-
                 newPin.userId = xhr.response.id;
+                
                 newPin.lat = parseFloat(xhr.response.current_lat);
                 newPin.lng = parseFloat(xhr.response.current_lng);
 
