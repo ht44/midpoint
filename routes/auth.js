@@ -38,6 +38,10 @@ router.route('/login')
 router.route('/register')
   .get((req, res) => {
     res.render('auth/register');
-  });
+  })
+
+  .post((req, res) => {
+    res.redirect('users/new');
+  })
 
 module.exports = router;

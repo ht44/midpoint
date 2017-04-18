@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs');
 const request = require('request');
 require('dotenv').load()
 
-  router.route('/')
+router.route('/')
     //index all users ** for admin only **
     .get(function(req, res) {
         knex('users')
@@ -16,22 +16,21 @@ require('dotenv').load()
                     users
                 })
             })
-        // res.send('yomamma')
     })
 
     // AUTH POST TO CREATE NEW ACCOUNT
     .post((req, res) => {
         var hash = bcrypt.hashSync(req.body.cred.password_digest, 10)
         req.body.cred.password_digest = hash
-        knex('users').insert(req.body.cred).returning('id').then(function(id){
-            res.redirect(`/users/${id}/edit`);
+        knex('users').insert(req.body.cred).returning('id').then(function(id) {
+            console.log(id[0]);
+            console.log(typeof id[0]);
+            req.session.userId = id[0];
+            res.redirect(`/users/${id[0]}/edit`);
         })
-          // .catch(err => {
-          //     console.log(err);
-          //     res.send('didn\'t work');
-          // });
     });
 
+<<<<<<< HEAD
   router.route('/:user_id/edit')
   //
     .get((req,res)=>{
@@ -54,17 +53,44 @@ require('dotenv').load()
         })
   //}
     // });
-
-
-  router.route('/new')
-          // SIGNUP PAGE
+=======
+router.route('/:user_id/edit')
+    //
     .get((req, res) => {
-              res.render('users/new');
+        knex('users')
+            .where('id', req.params.user_id)
+            .first()
+            .then(function(user) {
+                // request(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${user.home_lat},${user.home_lng}&key=${process.env.API_KEY}`, function(error, response, body){
+                //   console.log('error:', error);
+                //   console.log('statuscode: ', response && response.statusCode);
+                //   // console.log('body: ', body);
+                //   var parsedBody = JSON.parse(body);
+                //   var renderedAddress = parsedBody.results[0].formatted_address;
+                // user.address = renderedAddress;
+                // console.log(user.address);
+                // console.log(typeof user.address);
+                res.render('users/edit', {
+                    user
+                    // res.send('wow')
+                    // })
+                })
+            })
+        //}
+    });
+>>>>>>> d676d144c9d4cd16a0ba140a6dca1716ee74fe50
+
+
+router.route('/new')
+    // SIGNUP PAGE
+    .get((req, res) => {
+        res.render('users/new');
     })
 
-  router.route('/:user_id')
+router.route('/:user_id')
 
     .put((req, res) => {
+<<<<<<< HEAD
       // console.log(req.body.user.address);
       knex('users')
           .update({
@@ -93,6 +119,31 @@ require('dotenv').load()
             res.send(err);
           })
         })
+=======
+        // console.log(req.body.user.address);
+        knex('users')
+
+            .update({
+                username: req.body.user.username,
+                first: req.body.user.first,
+                last: req.body.user.last,
+                img_url: req.body.user.img_url,
+                email: req.body.user.email,
+                home_address: req.body.user.home_address
+            })
+            // knex('users')
+            .where({
+                id: req.params.user_id
+            })
+            // .first()
+            .then(() => {
+                //this is where we convert an address to lat and long
+                // request(`https://maps.googleapis.com/maps/api/geocode/json?address=${req.body.user.home_address}&key=${process.env.API_KEY}`, function(error, response, body){
+
+                res.redirect(`/users/${req.params.user_id}`);
+            });
+    })
+>>>>>>> d676d144c9d4cd16a0ba140a6dca1716ee74fe50
 
 
     .delete((req, res) => {
@@ -106,7 +157,7 @@ require('dotenv').load()
             });
     })
     .get(function(req, res) {
-      console.log(req.header);
+        console.log(req.header);
         knex('users')
             .where('id', req.params.user_id)
             .first()
@@ -117,7 +168,7 @@ require('dotenv').load()
             });
     });
 
-  router.route('/:user_id/delete')
+router.route('/:user_id/delete')
     .get(function(req, res) {
         knex('users')
             .select('id', 'email')
