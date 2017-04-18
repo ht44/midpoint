@@ -87,7 +87,6 @@ require('dotenv').load()
             //this is where we convert an address to lat and long
             // request(`https://maps.googleapis.com/maps/api/geocode/json?address=${req.body.user.home_address}&key=${process.env.API_KEY}`, function(error, response, body){
 
-            })
             res.redirect(`/users/${req.params.user_id}`);
           });
         })
