@@ -47,7 +47,12 @@ input {
 
 #map {
     height: 70vh;
-    width: 40vw;
+    width: 100%;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
 }
 
 .info {

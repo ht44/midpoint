@@ -1,0 +1,26 @@
+header {
+  overflow: auto;
+  padding: 10px;
+}
+
+#logo {
+  color: #1d0b71;
+  float: left;
+  font-weight: 700;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+}
+
+#user {
+  float: right;
+}
+
+#user img {
+  vertical-align: middle;
+}
+
+#user span {
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: middle;
+}
