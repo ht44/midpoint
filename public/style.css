@@ -71,7 +71,16 @@ section label {
     width: 100%;
 }
 
-.icon {
+#steps {
+  margin: auto;
+  width: 50%;
+}
+
+#steps img {
+  vertical-align: middle;
+}
+
+.icon, .arrow {
   width: 24px;
   height: 24px;
 }
