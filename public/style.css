@@ -140,3 +140,11 @@ h2.dialog {
   width: 100;
   height: 100;
 }
+
+.ui-autocomplete-input {
+  
+}
+.ui-autocomplete {
+  background-color: white;
+  list-style: none;
+}
