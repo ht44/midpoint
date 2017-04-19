@@ -73,7 +73,7 @@ router.route('/:group_id')
         )
         .del()
         .then(() => {
-            res.render('./');
+            res.redirect(`/users/${req.currentUser.id}/groups`);
         });
 })
 
