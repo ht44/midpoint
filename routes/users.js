@@ -19,17 +19,12 @@ router.route('/')
         // res.send('yomamma')
     })
 
-    // AUTH POST TO CREATE NEW ACCOUNT
     .post((req, res) => {
         var hash = bcrypt.hashSync(req.body.cred.password_digest, 10)
         req.body.cred.password_digest = hash
         knex('users').insert(req.body.cred).returning('id').then(function(id) {
             res.redirect(`/users/${id}/edit`);
         })
-        // .catch(err => {
-        //     console.log(err);
-        //     res.send('didn\'t work');
-        // });
     });
 
 router.route('/:user_id/edit')
@@ -124,23 +119,5 @@ router.route('/:user_id/delete')
                 });
             });
     })
-
-    router.route('/:user_id/groups')
-        .get(function(req, res) {
-            knex('users_groups')
-            .select('user_id', 'group_id')
-            .from('users_groups')
-            .where('user_id', req.params.user_id)
-            .join('groups', 'users_groups.group_id', '=', 'groups.id')
-            .select('name')
-            .then((groupsJoi)=>{
-                console.log(groupsJoi);
-                res.render('groups/show', {
-                    groupsJoi: groupsJoi
-                })
-            })
-        })
-
-
 
 module.exports = router;

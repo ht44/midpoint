@@ -46,6 +46,7 @@ app.use(setUser);
 
 // Router middleware
 app.use('/users', usersRouter);
+app.use('/users/:user_id/groups', groupsRouter);
 app.use('/groups', groupsRouter);
 app.use('/midpoint', midpointRouter);
 app.use('/auth', authRouter);

@@ -107,6 +107,7 @@ function initMap() {
     addGroup.addEventListener('click', (ev) => {
         ev.preventDefault();
         var groupId = document.getElementById('group-id').value
+        document.getElementById('group-id').value = null;
         // ajax get @ server
         var xhr = new XMLHttpRequest();
         xhr.responseType = 'json';
@@ -146,6 +147,7 @@ function initMap() {
         ev.preventDefault();
         var existing = false;
         var username = document.getElementById('user-id').value
+        document.getElementById('user-id').value = null;
         users.forEach(user => {
           if (user.username === username) {
             existing = true;
