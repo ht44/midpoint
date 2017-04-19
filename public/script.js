@@ -25,7 +25,7 @@ function initMap() {
 
     var input = document.getElementById('search-box');
     var searchBox = new google.maps.places.SearchBox(input);
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+    // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
     var service = new google.maps.places.PlacesService(map);
 
@@ -65,7 +65,8 @@ function initMap() {
                              '<h3>' + details.rating + ' Stars</h3>' +
                              '<p>' + details.formatted_address + '</p>' +
                              '<h1>' + details.formatted_phone_number + '</h1>' +
-                             '<a:link:active>' + details.website + '</a>' +
+                             '<h1>' + details.opening_hours.weekday_text + '</h1>' +
+                            //  '<a href=' + details.website + '</a>' +
                              '<div id="bodyContent">'+
                              '</div>'
                            });
@@ -94,6 +95,11 @@ function initMap() {
         map.setCenter(location);
         // ajax put @ server
         var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState === 4) {
+            myPin.username = xhr.response;
+          }
+        }
         xhr.open('PUT', `http://localhost:3000/locations/users`);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify(location));
@@ -106,6 +112,7 @@ function initMap() {
 
     const addGroup = document.getElementById('groups');
     addGroup.addEventListener('click', (ev) => {
+      console.log(users);
         var groupId = ev.target.id;
         console.log(groupId);
         // document.getElementById('group-id').value = null;
@@ -132,6 +139,11 @@ function initMap() {
                     newPin.userId = result.id;
                     newPin.lat = parseFloat(result.current_lat);
                     newPin.lng = parseFloat(result.current_lng);
+                    newPin.username = result.username;
+                    // NONIIIIIIIIIII NHAND INSIDE BELOW WHERE IT SAYS this
+                    newPin.addListener('click', function (ev) {
+                      console.log(this);
+                    })
                     users.push(newPin);
                 });
                 meanCenter = midpoint.getMidpoint(users);
@@ -172,7 +184,10 @@ function initMap() {
                 newPin.username = xhr.response.username;
                 newPin.lat = parseFloat(xhr.response.current_lat);
                 newPin.lng = parseFloat(xhr.response.current_lng);
-
+                // NONIIIIIIIIIII NHAND INSIDE BELOW WHERE IT SAYS this
+                newPin.addListener('click', function (ev) {
+                  console.log(this);
+                });
                 users.push(newPin);
                 meanCenter = midpoint.getMidpoint(users);
                 centerPin = dropPin(meanCenter, map, imagePano);

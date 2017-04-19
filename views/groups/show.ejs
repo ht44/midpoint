@@ -12,10 +12,11 @@
       <ul>
         <%groupsJoi.forEach(function(thing){ %>
           <li>
+
               <%=thing.name%>
+              <a href ="./<%=thing.group_id%>/edit">edit</a>
               <form action="/groups/<%= thing.group_id %>?_method=DELETE" method="POST">
-                <p>Delete</p>
-                <input type="submit" name="Delete Group" />
+                <input type="submit" value="Delete Group" />
               </form>
           </li>
       <%})%>
