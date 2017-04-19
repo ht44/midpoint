@@ -81,12 +81,17 @@ section label {
 #steps {
   margin: auto;
   width: 50%;
-  align-items: center;
+  text-align: center;
   padding-top: 50px;
   padding-bottom: 50px;
 }
 
 #steps img {
+  margin: 0 10px;
+  vertical-align: middle;
+}
+
+#steps span {
   vertical-align: middle;
 }
 
