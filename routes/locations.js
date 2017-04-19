@@ -5,8 +5,15 @@ const knex = require('../db/knex');
 const router = express.Router();
 
 router.route('/users')
+
   .put((req, res) => {
     res.redirect(`/locations/users/${req.session.userId}`);
+  })
+
+  .get((req, res) => {
+    knex.select('username').from('users').then(usernames => {
+      res.send(usernames);
+    });
   });
 
 router.route('/groups')

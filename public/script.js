@@ -4,6 +4,21 @@ function initMap() {
         imageGuess = 'http://maps.google.com/mapfiles/kml/pal4/icon53.png',
         imagePano = 'http://maps.google.com/mapfiles/kml/pal4/icon61.png';
 
+    var usernames = [];
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState === 4) {
+            var parsed = JSON.parse(xhr.response);
+            parsed.forEach(result => {
+              usernames.push(result.username);
+            })
+            console.log(usernames);
+          }
+        }
+        xhr.open('GET', `http://localhost:3000/locations/users`);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(null);
+
     /////////////////////////////////////////////////////////////////////////////
 
     var meanCenter = midpoint.getMidpoint(midpoint.test),
@@ -110,11 +125,14 @@ function initMap() {
 
     /////////////////////////////////////////////////////////////////////////////
 
+    $('#user-id').autocomplete({
+      source: usernames
+    });
     //
 
     const addGroup = document.getElementById('groups');
     addGroup.addEventListener('click', (ev) => {
-      console.log(users);
+
         var groupId = ev.target.id;
         console.log(groupId);
         // document.getElementById('group-id').value = null;
@@ -174,13 +192,14 @@ function initMap() {
         ev.preventDefault();
         var existing = false;
         var username = document.getElementById('user-id').value
+        console.log(username);
         document.getElementById('user-id').value = null;
         users.forEach(user => {
           if (user.username === username) {
             existing = true;
           }
         });
-        if (existing) return;
+        if (existing || !username) return;
         var xhr = new XMLHttpRequest();
         xhr.responseType = 'json';
         xhr.onreadystatechange = () => {
