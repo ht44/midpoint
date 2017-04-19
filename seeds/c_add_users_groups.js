@@ -12,7 +12,8 @@ exports.seed = function(knex, Promise) {
         {user_id: 5, group_id: 2},
         {user_id: 6, group_id: 2},
         {user_id: 7, group_id: 2},
-        {user_id: 8, group_id: 2}
+        {user_id: 8, group_id: 2},
+        {user_id: 1, group_id: 2}
       ]);
     });
 };

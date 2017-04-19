@@ -31,6 +31,10 @@
 }
 
 #group-menu li {
+  background-color: #232a88;
+  color: #fff;
+  display: block;
+  padding: 10px 20px;
   margin: 0;
   padding: 0;
 }

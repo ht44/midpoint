@@ -104,16 +104,17 @@ function initMap() {
 
     //
 
-    const addGroup = document.getElementById('add-group');
+    const addGroup = document.getElementById('groups');
     addGroup.addEventListener('click', (ev) => {
-        ev.preventDefault();
-        var groupId = document.getElementById('group-id').value
-        document.getElementById('group-id').value = null;
+        var groupId = ev.target.id;
+        console.log(groupId);
+        // document.getElementById('group-id').value = null;
         // ajax get @ server
         var xhr = new XMLHttpRequest();
         xhr.responseType = 'json';
         xhr.onreadystatechange = () => {
             if (xhr.readyState === 4) {
+              console.log(xhr.response);
               closeWindow();
               centerPin.setMap(null);
                 users.forEach(user => {

@@ -9,11 +9,11 @@ $(document).ready(function(){
     $('#group-menu').toggle()
   })
 
-  $('#group-menu a').click(function(event) {
+  $('#group-menu li').click(function(event) {
     event.preventDefault()
     $('#group-selector').text($(this).text())
     $('#group-menu').hide()
-    $('#group-menu a').removeClass('selected')
+    $('#group-menu li').removeClass('selected')
     $(this).addClass('selected')
   })
 })

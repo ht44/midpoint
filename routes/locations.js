@@ -18,8 +18,10 @@ router.route('/groups')
 router.route('/groups/:group_id')
 
   .get((req, res) => {
-    var groupName = (req.params.group_id);
-    knex('groups').where('name', groupName)
+    console.log("WE GFOT TO ");
+    var groupId = parseInt(req.params.group_id, 10);
+    console.log(groupId);
+    knex('groups').where('id', groupId)
     .first()
     .then((group)=>{
         knex.select(
