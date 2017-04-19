@@ -25,6 +25,7 @@ router.route('/groups/:group_id')
     .first()
     .then((group)=>{
         knex.select(
+          'users.username',
           'users.email',
           'users.id',
           'users.current_lat',
@@ -48,7 +49,7 @@ router.route('/users/:user_id')
           current_lat: req.body.lat,
           current_lng: req.body.lng
         }).then(() => {
-          res.sendStatus(200);
+          res.send(req.currentUser.username);
         });
       } else {
         console.log('nope');
