@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>new</h1>
+
+    <form action="/users/user_id/groups/new?_method=POST" method="POST">
+    <input type="text" name="groupName" value="">
+      <ul>
+        <%allUserButYou.forEach(function(user){ %>
+
+          <li>
+              <input type="radio" name="" value="<%user.username%>">
+             <a <%=user%>/select"><%=user.username%></a>
+          </li>
+      <%})%>
+      </ul>
+      <input type="submit" name="New Group" />
+
+  </form>
+
+
+</body>
+</html>
