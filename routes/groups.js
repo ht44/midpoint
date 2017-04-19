@@ -30,7 +30,7 @@ router.route('/')
     })
 
 
-router.route('/:group_id/edit')
+router.route('/:group_id')
     .get((req, res) => {
         knex('users_groups')
             .select('user_id', 'group_id')
@@ -48,7 +48,7 @@ router.route('/:group_id/edit')
                         // console.log(allUserinGroup, groupStuff);
                         // console.log(allUserinGroup[0].group_id);
                         // console.log(`groups/${allUserinGroup[0].group_id}/edit`);
-                        res.render('groups/edit', {
+                        res.render('groups/index', {
                             allUserinGroup: allUserinGroup,
                             groupStuff: groupStuff
                         })
