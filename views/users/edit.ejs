@@ -11,23 +11,23 @@
     <form action="/users/<%=user.id%>?_method=PUT" method="POST">
       <div class="field">
         <label>First Name:</label>
-        <input name="user[first]" type="text" placeholder="<%= user.first %>" />
+        <input name="user[first]" type="text" value="<%= user.first %>"/>
       </div>
       <div class="field">
         <label>Last Name:</label>
-        <input name="user[last]" type="text" placeholder="<%= user.last %>" />
+        <input name="user[last]" type="text" value="<%= user.last %>" />
       </div>
       <div class="field">
         <label>User Image:</label>
-        <input name="user[img_url]" type="text" placeholder="<%= user.img_url %>"/>
+        <input name="user[img_url]" type="text" value="<%= user.img_url %>" />
       </div>
       <div class="field">
         <label>Email Address:</label>
-        <input name="user[email]" type="text" placeholder="<%= user.email %>"/>
+        <input name="user[email]" type="text" value="<%= user.email %>" required/>
       </div>
       <div class="field">
         <label>Home address (e.g 807 S Main, Vega, TX 79092 ):</label>
-        <input name="user[home_address]" type="text" placeholder="<%= user.home_address %>"/>
+        <input name="user[home_address]" type="text" value="<%= user.home_address %>" />
       </div>
       <div class="field">
         <button class="submit">Update User Info</button>
