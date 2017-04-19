@@ -1,0 +1,23 @@
+#controls {
+  float: left;
+}
+
+#build {
+  float: right;
+}
+
+#people {
+  clear: both;
+  float: left;
+  padding: 20px 0;
+}
+
+#group-save {
+  display: none;
+  float: right;
+  padding: 20px 0;
+}
+
+.box {
+  width: 50%;
+}

@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
     <%- include('../partials/head'); %>
+    <link href="style/step1.css" type="text/css" rel="stylesheet" />
     <script src="math.js" charset="utf-8"></script>
     <script src="script.js" charset="utf-8"></script>
+    <script src="script/step1.js" charset="utf-8"></script>
     <script async defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%=apiKey%>&libraries=places&callback=initMap"></script>
     <title>Home | Midpoint</title>
 </head>
@@ -27,24 +29,32 @@
     <h1 class="dialog">Who's Joining?</h1>
     <h2 class="dialog">Create a group - and meet in the middle!</h2>
     <div class="blue">
-      <div></div>
-    <form id="controls" method="GET">
-      <h4>select a group</h4>
-      <input id="group-id" type="text" name="type" placeholder="Group Name">
-      <input id="add-group" type="submit" value="Load Group">
-    </form>
-    <form method="GET">
-      <input id="user-id" type="text" name="type" placeholder="Username">
-      <input id="add-user" type="submit" value="Load User">
-      <input id="remove-user" type="button" value="Delete User">
-    </form>
-    <form>
-      <input id="search-box" type="text" placeholder="Search Box">
-    </form>
-    <form method="POST">
-      <input id="group-name" type="text" placeholder="Group Name">
-      <button id="save-group" class="submit">Create New Group</button>
+      <div class="blue-content">
+        <form id="controls" class="box" method="GET">
+          <h4>select a group</h4>
+          <input id="group-id" type="text" name="type" placeholder="Group Name">
+          <button id="add-group" type="submit">Load Group</button>
+        </form>
+        <form id="build" class="box" method="GET">
+          <h4>build a group</h4>
+          <input id="user-id" type="text" name="type" placeholder="Username">
+          <button id="add-user" type="submit">Add User</button>
+          <button id="remove-user" type="button">Remove User</button>
+        </form>
+        <div id="people" class="box">
+          <h4><span id="people-count">5</span> people added</h4>
+          <a href="#" id="people-save">+ Save as a New Group</a>
+        </div>
+
+        <%# <form>
+          <input id="search-box" type="text" placeholder="Search Box">
+        </form>%>
+        <form id="group-save" class="box" method="POST">
+          <h4>save new group as </h4>
+          <input id="group-name" type="text" placeholder="Group Name">
+          <button id="save-group" class="submit">Create New Group</button>
+        </form>
+      </div>
     </div>
-    </form>
 </body>
 </html>

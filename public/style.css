@@ -115,9 +115,16 @@ h2.dialog {
 
 .blue {
   width: 100%;
-  height: 200px;
   background-color: #bfe7ff;
+  padding: 20px;
+  overflow: auto;
 }
+
+.blue-content {
+  max-width: 950px;
+  margin: 0 auto;
+}
+
 .icon, .arrow {
   width: 24px;
   height: 24px;
