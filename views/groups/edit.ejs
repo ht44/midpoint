@@ -11,17 +11,23 @@
 <body>
 
     <ul>
-        <h1><%= allUserinGroup[0].name %></h1>
-        <%groupStuff.forEach(function(user){ %>
-            <li>
-                <form action="/users/<%=user.username%>?_method=DELETE" method="POST">
-                  <input type="submit" name="Delete User" />
-                <a href ="/users/<%=user.username%>/delete">Delete</a>
-                </form>
+        <%groupStuff.forEach(function(group){ %>
+                <li>
+                    <h1><%=group.name%></h1>
 
-            </li>
-            <%})%>
+                </li>
+                <%})%>
+        <%allUserinGroup.forEach(function(user){ %>
+                <li>
+                    <h1><%=user.username%></h1>
+                    <form action="/users/<%=user.username%>?_method=DELETE" method="POST">
+                        <input type="submit" name="Delete User" />
+                        <a href="/users/<%=user.username%>/delete">Delete</a>
+                    </form>
 
+                </li>
+                <%})%>
+        <ul>
 
 </body>
 

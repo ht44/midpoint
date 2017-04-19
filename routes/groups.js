@@ -38,16 +38,16 @@ router.route('/:group_id/edit')
             .where('group_id', req.params.group_id)
             .join('users', 'users_groups.user_id', '=', 'users.id')
             .select('username')
-            .where('users.id', req.params.user_id)
             .then((allUserinGroup) => {
                 knex('groups')
                     .select('name')
                     .where('id', req.params.group_id)
-                // var allUserinGroup
                     .then((groupStuff) => {
+                        console.log(allUserinGroup);
+                        console.log(groupStuff);
                         // console.log(allUserinGroup, groupStuff);
-                        console.log(allUserinGroup[0].group_id);
-                        console.log(`groups/${allUserinGroup[0].group_id}/edit`);
+                        // console.log(allUserinGroup[0].group_id);
+                        // console.log(`groups/${allUserinGroup[0].group_id}/edit`);
                         res.render('groups/edit', {
                             allUserinGroup: allUserinGroup,
                             groupStuff: groupStuff
@@ -80,6 +80,41 @@ router.route('/:group_id/edit')
 //             })
 //
 //     })
+
+
+
+
+
+router.route('/:group_id/delete')
+    .get(function(req, res) {
+      console.log('you got in~!~~!!!~~');
+        knex('groups')
+            .select('group_id')
+            .where(
+                'group_id', req.params.group_id
+            )
+            .first()
+            .then(function(group) {
+                res.render('groups/delete', {
+                    group
+                });
+            });
+    })
+
+router.route('/:group_id')
+
+
+.delete((req, res) => {
+    knex('groups')
+        .where(
+            'id', req.params.group_id
+        )
+        .del()
+        .then(() => {
+            res.render('./');
+        });
+})
+
 
 
 
