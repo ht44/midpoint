@@ -27,3 +27,42 @@ header {
   margin-right: 10px;
   vertical-align: middle;
 }
+
+#user-menu {
+  background-color: #FFF;
+  box-shadow: -5px 5px 10px #eee;
+  display: none;
+  position: absolute;
+  text-align: left;
+  top: 43px;
+  width: 225px;
+  right: 0;
+  z-index: 999999;
+}
+
+#user-menu a {
+  border-top: 1px #eee solid;
+  display: block;
+  padding: 10px;
+  vertical-align: middle;
+}
+
+#user-menu a:hover{
+  background-color: #eee;
+}
+
+#user-menu img {
+  float: right;
+  vertical-align: middle;
+}
+
+#user-menu li {
+  margin: 0;
+  padding: 0;
+}
+
+#user-menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
