@@ -4,8 +4,25 @@
   </div>
   <div id="user">
     <a href="users/<%= currentUser.id %>">
-      <span><%= currentUser.email %></span>
+      <span>Welcome, <%= currentUser.email %></span>
       <img src="image/user-icon.svg" class="icon"/>
     </a>
+  </div>
+  <div id="user-menu">
+    <ul>
+      <li>
+        <a href="users/<%= currentUser.id %>">
+          <img src="image/dashboard.svg" class="icon"/>
+          <span>My Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a href="auth/logout">
+          <img src="image/logout.svg" class="icon"/>
+          <span>Logout</span>
+        </a>
+
+      </li>
+    </ul>
   </div>
 </header>
