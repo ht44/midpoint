@@ -25,7 +25,7 @@ function initMap() {
 
     var input = document.getElementById('search-box');
     var searchBox = new google.maps.places.SearchBox(input);
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+    // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
     var service = new google.maps.places.PlacesService(map);
 

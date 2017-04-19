@@ -63,23 +63,26 @@ router.route('/:user_id')
 
     .put((req, res) => {
         knex('users')
-            .where('id', req.params.user_id)
+        .where('id', req.params.user_id)
             .update({
-                username: req.body.user.username,
+                // username: req.body.user.username,
                 first: req.body.user.first,
                 last: req.body.user.last,
                 img_url: req.body.user.img_url,
                 email: req.body.user.email,
                 home_address: req.body.user.home_address
             })
-        console.log('users.home_address');
-        //   .then((users) => {
+            // .returning('id')
+        // console.log('the user ID is:  ', req.params.user_id)
+          .then(() => {
+
         //   console.log(userObj);
         // request(`https://maps.googleapis.com/maps/api/geocode/json?address=${req.body.user.home_address}&key=${process.env.API_KEY}`, function(error, response, body){
 
-        // res.redirect(`/users/${req.params.user_id}`);
-        //   });
-    })
+        res.redirect(`/users/${req.params.user_id}`);
+
+    });
+  })
 
 
 
