@@ -11,7 +11,25 @@ router.route('/users')
 
 router.route('/groups')
   .post((req, res) => {
-    console.log(req.body);
+    var groupName;
+    req.body.forEach(item => {
+      if (item.user_id === 'session') {
+        item.user_id = req.currentUser.id;
+      }
+      if (item.hasOwnProperty('name')) {
+        groupName = req.body.pop();
+      }
+    });
+    groupName.created_by = req.currentUser.id;
+    knex('groups').insert(groupName).returning('id').then(id => {
+      req.body.forEach(item => {
+        item.group_id = id[0];
+      })
+      knex('users_groups').insert(req.body).returning('id').then(id => {
+        console.log(id);
+      });
+    });
+
     res.sendStatus(200);
   })
 
