@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>edit</title>
+</head>
+
+<body>
+
+        <%groupStuff.forEach(function(group){ %>
+                    <h1><%=group.name%></h1>
+                <%})%>
+        <ul>
+            <h2>members in the group:</h2>
+        <%allUserinGroup.forEach(function(user){ %>
+                <li><%=user.username%></li>
+                <%})%>
+        <ul>
+
+</body>
+
+</html>

@@ -30,7 +30,7 @@ router.route('/')
     })
 
 
-router.route('/:group_id/edit')
+router.route('/:group_id')
     .get((req, res) => {
         knex('users_groups')
             .select('user_id', 'group_id')
@@ -48,7 +48,7 @@ router.route('/:group_id/edit')
                         // console.log(allUserinGroup, groupStuff);
                         // console.log(allUserinGroup[0].group_id);
                         // console.log(`groups/${allUserinGroup[0].group_id}/edit`);
-                        res.render('groups/edit', {
+                        res.render('groups/index', {
                             allUserinGroup: allUserinGroup,
                             groupStuff: groupStuff
                         })
@@ -57,29 +57,43 @@ router.route('/:group_id/edit')
             })
     })
 
+    .put((req,res)=>{
+        knex('groups')
+        .update('name', req.body.groupInfo.name)
+        .where('id', req.params.group_id)
+        .then((groupInfo)=>{
+            res.redirect(`/groups/${req.params.group_id}`),
+            {
+                groupInfo: groupInfo
+            }
+
+        })
+
+        // knex('users_groups')
+        // .select('user_id', 'group_id')
+        // .where('group_id', req.params.group_id)
+        // .join('users', 'users_groups.user_id', '=', 'users.id')
+        // .select('username', 'firstname')
+        // .update({
+        //     user_id: req.body,
+        //     group_id: req.body
+        // })
+
+    })
+
+    .delete((req, res) => {
+        knex('groups')
+            .where(
+                'id', req.params.group_id
+            )
+            .del()
+            .then(() => {
+                res.redirect(`/users/${req.currentUser.id}/groups`);
+            });
+    })
 
 
 
-// router.route('/new')
-//     .get((req, res) => {
-//         knex('users')
-//             .whereNot('users.id', req.params.user_id)
-//             .then((allUserButYou) => {
-//                 console.log(allUserButYou)
-//                 res.render('groups/new', {
-//                     allUserButYou: allUserButYou
-//                 })
-//
-//             })
-//     })
-//     .put((req, res) => {
-//         knex('groups')
-//             .insert({
-//                 name: req.body.name,
-//                 created_by: req.params.user_id
-//             })
-//
-//     })
 
 
 
@@ -101,20 +115,21 @@ router.route('/:group_id/delete')
             });
     })
 
-router.route('/:group_id')
 
 
-.delete((req, res) => {
-    knex('groups')
-        .where(
-            'id', req.params.group_id
-        )
-        .del()
-        .then(() => {
-            res.redirect(`/users/${req.currentUser.id}/groups`);
-        });
-})
 
+router.route('/:group_id/edit')
+    .get((req, res) => {
+        knex('groups')
+            .select('name', 'id')
+            .where('id', req.params.group_id)
+            .then((groupInfo) => {
+                console.log(groupInfo);
+                res.render('groups/edit', {
+                    groupInfo: groupInfo
+                });
+            });
+    });
 
 
 
