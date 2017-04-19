@@ -155,6 +155,8 @@ function initMap() {
                         lng: parseFloat(result.current_lng)
                     }, map, imageGuess);
                     newPin.userId = result.id;
+                    newPin.firstName = result.first;
+                    newPin.lastName = result.last;
                     newPin.lat = parseFloat(result.current_lat);
                     newPin.lng = parseFloat(result.current_lng);
                     newPin.username = result.username;
@@ -165,8 +167,7 @@ function initMap() {
 
                       infowindow = new google.maps.InfoWindow({
                           content: '<div class="info">' +
-                                   '<h1>' + this.username + '</h1>' +
-
+                                   '<h1>' + this.firstName + " " + this.lastName + '</h1>' +
                                    '</div>'
                                  });
                       infowindow.open(map, this);

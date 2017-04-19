@@ -50,6 +50,8 @@ router.route('/groups/:group_id')
     .first()
     .then((group)=>{
         knex.select(
+          'users.first',
+          'users.last',
           'users.username',
           'users.email',
           'users.id',
