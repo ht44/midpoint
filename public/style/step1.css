@@ -12,10 +12,47 @@
   padding: 20px 0;
 }
 
+#group-menu {
+  display: none;
+  max-height: 200px;
+  overflow: auto;
+  position: absolute;
+  width: 300px;
+}
+
+#group-menu a {
+  background-color: #232a88;
+  display: block;
+  padding: 10px 20px;
+}
+
+#group-menu a.selected {
+  color: #fff;
+}
+
+#group-menu li {
+  margin: 0;
+  padding: 0;
+}
+
+#group-menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
 #group-save {
   display: none;
   float: right;
   padding: 20px 0;
+}
+
+#group-selector {
+  background-color: #171c61;
+  display: inline-block;
+  color: #FFF;
+  padding: 20px;
+  width: 300px;
 }
 
 .box {

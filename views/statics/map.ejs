@@ -32,8 +32,17 @@
       <div class="blue-content">
         <form id="controls" class="box" method="GET">
           <h4>select a group</h4>
-          <input id="group-id" type="text" name="type" placeholder="Group Name">
-          <button id="add-group" type="submit">Load Group</button>
+          <%# <input id="group-id" type="text" name="type" placeholder="Group Name">
+          <button id="add-group" type="submit">Load Group</button>%>
+          <a href="#" id="group-selector">My Groups</a>
+          <div id="group-menu">
+            <ul>
+              <li><a class="selected" href="#">My Groups</a></li>
+              <% groups.map((group)=>{ %>
+                <li><a href="#"><%= group.name %> </a></li>
+              <% }) %>
+            </ul>
+          </div>
         </form>
         <form id="build" class="box" method="GET">
           <h4>build a group</h4>
