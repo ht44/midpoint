@@ -144,11 +144,19 @@ function initMap() {
     const addUser = document.getElementById('add-user');
     addUser.addEventListener('click', (ev) => {
         ev.preventDefault();
-        var userId = document.getElementById('user-id').value
+        var existing = false;
+        var username = document.getElementById('user-id').value
+        users.forEach(user => {
+          if (user.username === username) {
+            existing = true;
+          }
+        });
+        if (existing) return;
         var xhr = new XMLHttpRequest();
         xhr.responseType = 'json';
         xhr.onreadystatechange = () => {
             if (xhr.readyState === 4 && xhr.response) {
+              console.log(xhr.response);
               closeWindow();
               centerPin.setMap(null);
                 var newPin;
@@ -157,7 +165,7 @@ function initMap() {
                     lng: parseFloat(xhr.response.current_lng)
                 }, map, imageGuess);
                 newPin.userId = xhr.response.id;
-                
+                newPin.username = xhr.response.username;
                 newPin.lat = parseFloat(xhr.response.current_lat);
                 newPin.lng = parseFloat(xhr.response.current_lng);
 
@@ -167,7 +175,7 @@ function initMap() {
                 map.setCenter(meanCenter);
             }
         };
-        xhr.open('GET', `http://localhost:3000/locations/users/${userId}`);
+        xhr.open('GET', `http://localhost:3000/locations/users/${username}`);
         xhr.send(null);
     });
 
