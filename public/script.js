@@ -65,7 +65,8 @@ function initMap() {
                              '<h3>' + details.rating + ' Stars</h3>' +
                              '<p>' + details.formatted_address + '</p>' +
                              '<h1>' + details.formatted_phone_number + '</h1>' +
-                             '<a:link:active>' + details.website + '</a>' +
+                             '<h1>' + details.opening_hours.weekday_text + '</h1>' +
+                            //  '<a href=' + details.website + '</a>' +
                              '<div id="bodyContent">'+
                              '</div>'
                            });
