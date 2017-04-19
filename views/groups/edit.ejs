@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>edit</title>
+</head>
+
+<body>
+
+    <ul>
+        <h1><%= allUserinGroup[0].name %></h1>
+        <%groupStuff.forEach(function(user){ %>
+            <li>
+                <form action="/users/<%=user.username%>?_method=DELETE" method="POST">
+                  <input type="submit" name="Delete User" />
+                <a href ="/users/<%=user.username%>/delete">Delete</a>
+                </form>
+
+            </li>
+            <%})%>
+
+
+</body>
+
+</html>
