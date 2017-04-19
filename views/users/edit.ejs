@@ -5,8 +5,7 @@
     <title>Profile Page</title>
 </head>
 <body>
-  <%# TODO: replace static user id and 'test@test.com' with real user email %>
-  <%- include('../partials/navbar', {userId: 1, userEmail: 'test@test.com'}); %>
+  <%- include('../partials/navbar'); %>
   <section class="content">
     <h1>Edit User Info</h1>
     <form action="/users/<%=user.id%>?_method=PUT" method="POST">
