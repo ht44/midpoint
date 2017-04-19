@@ -65,7 +65,9 @@ function initMap() {
                              '<h3>' + details.rating + ' Stars</h3>' +
                              '<p>' + details.formatted_address + '</p>' +
                              '<h1>' + details.formatted_phone_number + '</h1>' +
-                             '<h1>' + details.opening_hours.weekday_text + '</h1>' +
+                             '<h3>' + details.opening_hours.weekday_text + '</h3>' +
+                             '<h3>' + details.photos[1].html_attributions + '</h3>' +
+
                             //  '<a href=' + details.website + '</a>' +
                              '<div id="bodyContent">'+
                              '</div>'
@@ -142,8 +144,19 @@ function initMap() {
                     newPin.username = result.username;
                     // NONIIIIIIIIIII NHAND INSIDE BELOW WHERE IT SAYS this
                     newPin.addListener('click', function (ev) {
-                      console.log(this);
-                    })
+                      console.log(this.username);
+                      closeWindow();
+
+                      infowindow = new google.maps.InfoWindow({
+                          content: '<div class="info">' +
+                                   '<h1>' + this.username + '</h1>' +
+
+                                   '</div>'
+                                 });
+                      infowindow.open(map, this);
+
+                    });
+                  // })
                     users.push(newPin);
                 });
                 meanCenter = midpoint.getMidpoint(users);
