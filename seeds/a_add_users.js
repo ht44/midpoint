@@ -23,7 +23,7 @@ exports.seed = function(knex, Promise) {
       { username: 'mindy1', email:'mindy@gmail', password_digest:require('bcryptjs').hashSync('password', 10), current_lat:30.949062, current_lng:-98.131720,home_address:'', home_lat:30.260834 , home_lng:-97.776852 , work_lat:30.297783 , work_lng:-97.753880},
       { username: 'cindy1', email:'cindy@gmail', password_digest:require('bcryptjs').hashSync('password', 10), current_lat:30.314662, current_lng:-97.103758,home_address:'', home_lat:30.260834 , home_lng:-97.776852 , work_lat:30.297783 , work_lng:-97.753880},
       { username: 'sadi1', email:'sadi@gmail', password_digest:require('bcryptjs').hashSync('password', 10), current_lat:29.949654, current_lng: -97.608567,home_address:'', home_lat:30.260834 , home_lng:-97.776852 , work_lat:30.297783 , work_lng:-97.753880},
-      { username: 'kyle1', email:'kyle@gmail', password_digest:require('bcryptjs').hashSync('password', 10), current_lat:30.201508, current_lng:97.975668,home_address:'', home_lat:30.260834 , home_lng:-97.776852 , work_lat:30.297783 , work_lng:-97.753880},
+      { username: 'kyle1', email:'kyle@gmail', password_digest:require('bcryptjs').hashSync('password', 10), current_lat:30.201508, current_lng:-97.975668,home_address:'', home_lat:30.260834 , home_lng:-97.776852 , work_lat:30.297783 , work_lng:-97.753880},
       { username: 'hayden1', email:'hayden@gmail', password_digest:require('bcryptjs').hashSync('password', 10), current_lat:29.946319, current_lng:-97.434624,home_address:'', home_lat:30.260834 , home_lng:-97.776852 , work_lat:30.297783 , work_lng:-97.753880}
       ]);
     });
