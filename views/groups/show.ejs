@@ -7,9 +7,13 @@
   <body>
       <h1>these are your yourGroups mayn</h1>
       <ul>
-        <%groupsJoi.forEach(function(group){ %>
+        <%groupsJoi.forEach(function(thing){ %>
           <li>
-              <%=group.name%>
+              <%=thing.name%>
+              <form action="/groups/<%= thing.group_id %>?_method=DELETE" method="POST">
+                <p>Do you want to delete the group?:  <%= thing.name %>?</p>
+                <input type="submit" name="Delete Group" />
+              </form>
           </li>
       <%})%>
   </ul>
