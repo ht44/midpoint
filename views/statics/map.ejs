@@ -22,7 +22,12 @@
     </div>
     <div id="map"></div>
     <%- include('../partials/steps', {currentStep: 1}); %>
+    <h1 class="dialog">Who's Joining?</h1>
+    <h2 class="dialog">Create a group - and meet in the middle!</h2>
+    <div class="blue">
+      <div></div>
     <form id="controls" method="GET">
+      <h4>select a group</h4>
       <input id="group-id" type="text" name="type" placeholder="Group Name">
       <input id="add-group" type="submit" value="Load Group">
     </form>
@@ -36,7 +41,8 @@
     </form>
     <form method="POST">
       <input id="group-name" type="text" placeholder="Group Name">
-      <input id="save-group" type="submit" value="Save Group">
+      <button class="submit">Create New Group</button>
+    </div>
     </form>
 </body>
 </html>

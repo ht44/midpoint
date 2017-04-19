@@ -13,7 +13,6 @@ body {
   margin: 0;
 }
 
-
 body, html {
   height: 100%;
 }
@@ -35,9 +34,17 @@ form .field {
 }
 
 
-
 h1, h2 {
   font-weight: normal;
+  margin: 0;
+  padding: 0 0 20px 0;
+}
+
+h4 {
+  color: #1d0b71;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 15px;
   margin: 0;
   padding: 0 0 20px 0;
 }
@@ -74,12 +81,38 @@ section label {
 #steps {
   margin: auto;
   width: 50%;
+  align-items: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
 #steps img {
   vertical-align: middle;
 }
 
+h1.dialog {
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: #1d0b71;
+  padding-bottom: 10px;
+}
+
+h2.dialog {
+  text-align: center;
+  font-weight: 700;
+  font-size: normal;
+  letter-spacing: 1px;
+  color: #a3a3a3;
+  padding-bottom: 50px;
+}
+
+
+.blue {
+  width: 100%;
+  height: 200px;
+  background-color: #bfe7ff;
+}
 .icon, .arrow {
   width: 24px;
   height: 24px;
