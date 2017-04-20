@@ -10,7 +10,9 @@ function initMap() {
           if (xhr.readyState === 4) {
             var parsed = JSON.parse(xhr.response);
             parsed.forEach(result => {
-              usernames.push(result.username);
+              if (result.username) {
+                usernames.push(result.username);
+              }
             })
             console.log(usernames);
           }
