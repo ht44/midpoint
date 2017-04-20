@@ -74,6 +74,10 @@ function initMap() {
     const backButton = document.getElementById('step-2-back-button');
     backButton.addEventListener('click', ev => {
         circle.setMap(null);
+        places.forEach(place=>{
+            place.setMap(null);
+        })
+        places = [];
     });
 
     const milesSubmit = document.getElementById('miles-submit');
