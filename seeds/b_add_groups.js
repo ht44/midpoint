@@ -5,11 +5,11 @@ exports.seed = function(knex, Promise) {
     .then(function () {
       // Inserts seed entries
       return knex('groups').insert([
-        {name:'work friends', created_by: 1},
-        {name:'drinking buddies', created_by: 2},
-        {name: 'bowling team', created_by: 3},
-        {name: 'book club', created_by: 4},
-        {name: 'shitty friends I dont want to see', created_by: 1},
+        {name:'Work Friends', created_by: 1},
+        {name:'Drinking Buddies', created_by: 2},
+        {name: 'Bowling Team', created_by: 3},
+        {name: 'Book Club', created_by: 4},
+        {name: 'Shitty Friends I Dont Want To See', created_by: 1},
         {name: 'Sky Diving Buddies', created_by: 3},
         {name: 'Music Club', created_by: 3},
         {name: 'Whisky Crew', created_by: 3},
