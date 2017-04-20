@@ -132,7 +132,7 @@ function initMap() {
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify(location));
         // xhr.send(JSON.stringify({lat: 69.69, lng: 69.69}));
-    });
+
 
     /////////////////////////////////////////////////////////////////////////////
 
@@ -273,6 +273,9 @@ function initMap() {
     const groupName = document.getElementById('group-name');
     const saveGroup = document.getElementById('save-group');
     saveGroup.addEventListener('click', (ev) => {
+      if (groupName.value == '') {
+        return;
+      }
       ev.preventDefault();
       var newGroup = [];
       users.forEach(user => {
@@ -287,7 +290,7 @@ function initMap() {
       xhr.responseType = 'json';
       xhr.onreadystatechange = () => {
         if (xhr.readyState === 4) {
-          console.log(xhr.status);
+          window.location.reload(true);
         }
       }
       xhr.open('POST', 'http://localhost:3000/locations/groups');
@@ -312,5 +315,6 @@ function initMap() {
         infowindow = null;
       }
     }
+        });
     /////////////////////////////////////////////////////////////////////////////
 }
