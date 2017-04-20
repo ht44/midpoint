@@ -83,8 +83,16 @@ function initMap() {
                              '<h3>' + details.rating + ' Stars</h3>' +
                              '<p>' + details.formatted_address + '</p>' +
                              '<h1>' + details.formatted_phone_number + '</h1>' +
-                             '<h3>' + details.opening_hours.weekday_text + '</h3>' +
-                             '<h3>' + details.photos[1].html_attributions + '</h3>' +
+                             '<a target="_blank" href =' + details.website + '>' + '<h2>' + 'website ' + '</h2>' + '</a>' +
+                             '<h3>' + details.opening_hours.weekday_text[0] + '</h3>' +
+                             '<h3>' + details.opening_hours.weekday_text[1] + '</h3>' +
+                             '<h3>' + details.opening_hours.weekday_text[2] + '</h3>' +
+                             '<h3>' + details.opening_hours.weekday_text[3] + '</h3>' +
+                             '<h3>' + details.opening_hours.weekday_text[4] + '</h3>' +
+                             '<h3>' + details.opening_hours.weekday_text[5] + '</h3>' +
+                             '<h3>' + details.opening_hours.weekday_text[6] + '</h3>' +
+
+
 
                             //  '<a href=' + details.website + '</a>' +
                              '<div id="bodyContent">'+
