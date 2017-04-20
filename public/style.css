@@ -116,7 +116,7 @@ h2.dialog {
 .blue {
   width: 100%;
   background-color: #bfe7ff;
-  padding: 20px;
+  padding: 80px 20px;
   overflow: auto;
 }
 

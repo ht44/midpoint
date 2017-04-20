@@ -187,6 +187,9 @@ function initMap() {
                 meanCenter = midpoint.getMidpoint(users);
                 centerPin = dropPin(meanCenter, map, imagePano);
                 map.setCenter(meanCenter);
+                // below is a new function which updates the ui to list all users
+                // see step1.js line 46 for more info
+                addUsers(xhr.response);
             }
         };
         xhr.open('GET', `http://localhost:3000/locations/groups/${groupId}`);
