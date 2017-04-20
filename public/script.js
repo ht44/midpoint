@@ -19,7 +19,7 @@ function initMap() {
             console.log(usernames);
           }
         }
-        xhr.open('GET', `http://localhost:3000/locations/users`);
+        xhr.open('GET', 'https://midpoint-center.herokuapp.com/locations/users');
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(null);
 
@@ -189,7 +189,7 @@ function initMap() {
             myPin.username = xhr.response;
           }
         }
-        xhr.open('PUT', `http://localhost:3000/locations/users`);
+        xhr.open('PUT', 'https://midpoint-center.herokuapp.com/locations/users');
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify(location));
         // xhr.send(JSON.stringify({lat: 69.69, lng: 69.69}));
@@ -255,7 +255,7 @@ function initMap() {
                 addUsersToCount(xhr.response);
             }
         };
-        xhr.open('GET', `http://localhost:3000/locations/groups/${groupId}`);
+        xhr.open('GET', `https://midpoint-center.herokuapp.com/locations/groups/${groupId}`);
         xhr.send(null);
     });
 
@@ -309,7 +309,7 @@ function initMap() {
                 map.setCenter(meanCenter);
             }
         };
-        xhr.open('GET', `http://localhost:3000/locations/users/${fullName}`);
+        xhr.open('GET', `https://midpoint-center.herokuapp.com/locations/users/${fullName}`);
         xhr.send(null);
     });
 
@@ -349,7 +349,7 @@ function initMap() {
           window.location.reload(true);
         }
       }
-      xhr.open('POST', 'http://localhost:3000/locations/groups');
+      xhr.open('POST', 'https://midpoint-center.herokuapp.com/locations/groups');
       xhr.setRequestHeader('Content-Type', 'application/json');
       xhr.send(JSON.stringify(newGroup));
     });
