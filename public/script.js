@@ -4,6 +4,7 @@ function initMap() {
         imageGuess = 'http://maps.google.com/mapfiles/kml/pal4/icon53.png',
         imagePano = 'http://maps.google.com/mapfiles/kml/pal4/icon61.png';
 
+    var geo = navigator.geolocation;
     var usernames = [];
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = () => {
@@ -97,7 +98,7 @@ function initMap() {
     });
 
     var locate = new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(position => {
+        geo.getCurrentPosition(position => {
             resolve({
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
