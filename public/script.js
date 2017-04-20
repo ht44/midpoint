@@ -60,6 +60,7 @@ function initMap() {
     //
     const nextButton = document.getElementById('step-1-button');
     nextButton.addEventListener('click', ev => {
+        if (circle) circle.setMap(null);
         circle = new google.maps.Circle({center:meanCenter,
                                        radius: circelSearchRadinMi*1609.34,
                                        fillOpacity: 0.35,
@@ -68,6 +69,11 @@ function initMap() {
                                        map: map});
         // var bounds = circle.getBounds();
         searchBox.setBounds(circle.getBounds());
+    });
+
+    const backButton = document.getElementById('step-2-back-button');
+    backButton.addEventListener('click', ev => {
+        circle.setMap(null);
     });
 
     const milesSubmit = document.getElementById('miles-submit');
