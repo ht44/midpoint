@@ -32,7 +32,8 @@ function initMap() {
         places = [],
         infowindow,
         circle,
-        lineDistance;
+        lineDistance,
+        circelSearchRadinMi = 1;
 
 
     var map = new google.maps.Map(document.getElementById('map'), {
@@ -112,7 +113,7 @@ function initMap() {
             });
 
             lineDistance = (calculatingDistance(meanCenter, result.geometry.location));
-            if(lineDistance<5){
+            if(lineDistance<circelSearchRadinMi){
                 places.push(newPlace);
             } else {
                 newPlace.setMap(null);
@@ -214,7 +215,7 @@ function initMap() {
                 map.setCenter(meanCenter);
                 if (circle) circle.setMap(null);
                 circle = new google.maps.Circle({center:meanCenter,
-                                               radius: 8047,
+                                               radius: circelSearchRadinMi*1609.34,
                                                fillOpacity: 0.35,
                                                fillColor: "#93f293",
                                                strokeOpacity: 0.5,
@@ -280,7 +281,7 @@ function initMap() {
                 centerPin = dropPin(meanCenter, map, imagePano);
                 if (circle) circle.setMap(null);
                 circle = new google.maps.Circle({center:meanCenter,
-                                               radius: 8047,
+                                               radius: circelSearchRadinMi*1609.34,
                                                fillOpacity: 0.35,
                                                fillColor: "#93f293",
                                                strokeOpacity: 0.5,
@@ -305,7 +306,7 @@ function initMap() {
         centerPin = dropPin(meanCenter, map, imagePano);
         if (circle) circle.setMap(null);
         circle = new google.maps.Circle({center:meanCenter,
-                                       radius: 8047,
+                                       radius: circelSearchRadinMi*1609.34,
                                        fillOpacity: 0.35,
                                        fillColor: "#93f293",
                                        strokeOpacity: 0.5,
