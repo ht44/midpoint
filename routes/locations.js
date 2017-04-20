@@ -84,9 +84,15 @@ router.route('/users/:user_id')
   })
 
   .get(function(req, res) {
+    console.log(req.params.user_id);
+    var names = req.params.user_id.split(' ');
+    console.log(names);
       knex.select('id', 'first', 'last', 'username', 'current_lat', 'current_lng', 'email')
       .from('users')
-      .where('username', req.params.user_id).first().then(result => {
+      .where({
+        first: names[0],
+        last: names[1]
+      }).first().then(result => {
         res.json(result);
       }).catch(err => {
           console.log(err);

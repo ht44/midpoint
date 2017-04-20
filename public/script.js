@@ -11,7 +11,7 @@ function initMap() {
             var parsed = JSON.parse(xhr.response);
             parsed.forEach(result => {
               if (result.username) {
-                usernames.push(result.username);
+                usernames.push(result.first + ' ' + result.last);
               }
             })
             console.log(usernames);
@@ -197,16 +197,17 @@ function initMap() {
     // GET user/:user_id
     const addUser = document.getElementById('add-user');
     addUser.addEventListener('click', (ev) => {
+        console.log(users);
         ev.preventDefault();
         var existing = false;
-        var username = document.getElementById('user-id').value
+        var fullName = document.getElementById('user-id').value
         document.getElementById('user-id').value = null;
         users.forEach(user => {
-          if (user.username === username) {
+          if (user.firstName + ' ' + user.lastName === fullName) {
             existing = true;
           }
         });
-        if (existing || !username) return;
+        if (existing || !fullName) return;
         var xhr = new XMLHttpRequest();
         xhr.responseType = 'json';
         xhr.onreadystatechange = () => {
@@ -241,7 +242,7 @@ function initMap() {
                 map.setCenter(meanCenter);
             }
         };
-        xhr.open('GET', `http://localhost:3000/locations/users/${username}`);
+        xhr.open('GET', `http://localhost:3000/locations/users/${fullName}`);
         xhr.send(null);
     });
 
