@@ -8,13 +8,13 @@
   </head>
   <body>
     <%- include('../partials/navbar'); %>
-      <h1>these are your yourGroups mayn</h1>
+      <h1>These are your your groups</h1>
       <ul>
         <%groupsJoi.forEach(function(thing){ %>
           <li>
 
               <%=thing.name%>
-              <a href="/groups/<%=thing.group_id%>/">Group Deets</a>
+              <!-- <a href="/groups/<%=thing.group_id%>/">Group Deets</a> -->
               <form action="/groups/<%= thing.group_id %>?_method=DELETE" method="POST">
                 <button type="submit" value="Delete Group">Delete Group</button>
               </form>
