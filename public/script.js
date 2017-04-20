@@ -57,6 +57,18 @@ function initMap() {
     // map.addListener('bounds_changed', () => {
     //   searchBox.setBounds(map.getBounds());
     // });
+    //
+    const nextButton = document.getElementById('step-1-button');
+    nextButton.addEventListener('click', ev => {
+        circle = new google.maps.Circle({center:meanCenter,
+                                       radius: circelSearchRadinMi*1609.34,
+                                       fillOpacity: 0.35,
+                                       fillColor: "#93f293",
+                                       strokeOpacity: 0.5,
+                                       map: map});
+        // var bounds = circle.getBounds();
+        searchBox.setBounds(circle.getBounds());
+    });
 
     const milesSubmit = document.getElementById('miles-submit');
     const milesInput = document.getElementById('miles-input');
