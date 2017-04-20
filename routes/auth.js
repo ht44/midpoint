@@ -16,7 +16,9 @@ router.route('/logout')
 
 router.route('/login')
   .get((req, res) => {
-    res.render('auth/login');
+    res.render('auth/login', {
+      message: 'PlEASE LOGIN'
+    });
   })
 
   .post((req, res) => {
@@ -26,6 +28,10 @@ router.route('/login')
         if (isUser) {
           req.session.userId = user.id;
           res.redirect('/midpoint');
+        } else {
+          res.render('auth/login', {
+            message: 'WRONG PASSWORD'
+          });
         }
       } else {
         res.redirect('/auth/register');
@@ -37,7 +43,9 @@ router.route('/login')
 
 router.route('/register')
   .get((req, res) => {
-    res.render('auth/register');
+    res.render('auth/register', {
+      message: 'Create an Account'
+    });
   })
 
   .post((req, res) => {

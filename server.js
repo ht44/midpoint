@@ -52,9 +52,15 @@ app.use('/midpoint', midpointRouter);
 app.use('/auth', authRouter);
 app.use('/locations', locationsRouter);
 
-// LOGIN PAGE
+// Root
 app.get('/', (req, res) => {
-  res.render('auth/login');
+  if (req.session.userId) {
+    res.redirect('/midpoint');
+  } else {
+    res.render('auth/login', {
+      message: 'PLEASE LOGIN'
+    });
+  }
 });
 
 app.listen(PORT, () => {

@@ -23,8 +23,15 @@ router.route('/')
         var hash = bcrypt.hashSync(req.body.cred.password_digest, 10)
         req.body.cred.password_digest = hash
         knex('users').insert(req.body.cred).returning('id').then(function(id) {
-            res.redirect(`/users/${id}/edit`);
-        })
+          // right here cant seem to get this working but redirecting to /auth/login is more secure anyway and a lot of websites do that
+            // res.redirect(`/users/${id}/edit`);
+            res.redirect('/auth/login');
+        }).catch(err => {
+          console.error(err);
+          res.render('auth/register', {
+            message: 'Account already exists'
+          });
+        });
     });
 
 router.route('/:user_id/edit')
