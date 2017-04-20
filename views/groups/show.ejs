@@ -14,7 +14,7 @@
           <li>
 
               <%=thing.name%>
-              <a href ="./<%=thing.group_id%>/edit">edit</a>
+              <a href="/groups/<%=thing.group_id%>/">Group Deets</a>
               <form action="/groups/<%= thing.group_id %>?_method=DELETE" method="POST">
                 <button type="submit" value="Delete Group">Delete Group</button>
               </form>

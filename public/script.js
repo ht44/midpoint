@@ -4,6 +4,21 @@ function initMap() {
         imageGuess = 'http://maps.google.com/mapfiles/kml/pal4/icon53.png',
         imagePano = 'http://maps.google.com/mapfiles/kml/pal4/icon61.png';
 
+    var usernames = [];
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState === 4) {
+            var parsed = JSON.parse(xhr.response);
+            parsed.forEach(result => {
+              usernames.push(result.username);
+            })
+            console.log(usernames);
+          }
+        }
+        xhr.open('GET', `http://localhost:3000/locations/users`);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(null);
+
     /////////////////////////////////////////////////////////////////////////////
 
     var meanCenter = midpoint.getMidpoint(midpoint.test),
@@ -110,13 +125,20 @@ function initMap() {
 
     /////////////////////////////////////////////////////////////////////////////
 
+    // This is the autocomplete. right now its a child of the form element
+    // with the id "build" ... if its not appended it gets appended to the dom.
+    // if you need to change the flow ... dont forget to append where you want.
+    // i think if you just move the form around though youre fine
     //
+
+    $('#user-id').autocomplete({
+      appendTo: '#build',
+      source: usernames
+    });
 
     const addGroup = document.getElementById('groups');
     addGroup.addEventListener('click', (ev) => {
-      console.log(users);
         var groupId = ev.target.id;
-        console.log(groupId);
         // document.getElementById('group-id').value = null;
         // ajax get @ server
         var xhr = new XMLHttpRequest();
@@ -139,6 +161,8 @@ function initMap() {
                         lng: parseFloat(result.current_lng)
                     }, map, imageGuess);
                     newPin.userId = result.id;
+                    newPin.firstName = result.first;
+                    newPin.lastName = result.last;
                     newPin.lat = parseFloat(result.current_lat);
                     newPin.lng = parseFloat(result.current_lng);
                     newPin.username = result.username;
@@ -149,8 +173,7 @@ function initMap() {
 
                       infowindow = new google.maps.InfoWindow({
                           content: '<div class="info">' +
-                                   '<h1>' + this.username + '</h1>' +
-
+                                   '<h1>' + this.firstName + " " + this.lastName + '</h1>' +
                                    '</div>'
                                  });
                       infowindow.open(map, this);
@@ -180,7 +203,7 @@ function initMap() {
             existing = true;
           }
         });
-        if (existing) return;
+        if (existing || !username) return;
         var xhr = new XMLHttpRequest();
         xhr.responseType = 'json';
         xhr.onreadystatechange = () => {

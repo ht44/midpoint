@@ -3,11 +3,11 @@
 <head>
     <%- include('../partials/head'); %>
     <link href="style/step1.css" type="text/css" rel="stylesheet" />
-    <script src="math.js" charset="utf-8"></script>
-    <script src="script.js" charset="utf-8"></script>
-    <script src="script/step1.js" charset="utf-8"></script>
-    <script async defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%=apiKey%>&libraries=places&callback=initMap"></script>
     <title>Home | Midpoint</title>
+    <script
+    src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+    integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+    crossorigin="anonymous"></script>
 </head>
 <body>
     <%- include('../partials/navbar'); %>
@@ -58,10 +58,12 @@
           <h4><span id="people-count">5</span> people added</h4>
           <a href="#" id="people-save">+ Save as a New Group</a>
         </div>
-
-        <form>
+        <!-- commenting out the <form> fixed so now you can hit enter when
+        youre searching for places and it wont go to a new page
+        -->
+        <!-- <form> -->
           <input id="search-box" type="text" placeholder="Search Box">
-        </form>
+        <!-- </form> -->
         <form id="group-save" class="box" method="POST">
           <h4>save new group as </h4>
           <input id="group-name" type="text" placeholder="Group Name">
@@ -69,5 +71,10 @@
         </form>
       </div>
     </div>
+    <script src="math.js" charset="utf-8"></script>
+    <script src="script.js" charset="utf-8"></script>
+    <script src="script/step1.js" charset="utf-8"></script>
+    <script async defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%=apiKey%>&libraries=places&callback=initMap"></script>
+    <!-- this is the jquery ui cdn i used to make the autocomplete -->
 </body>
 </html>
