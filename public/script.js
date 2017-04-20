@@ -125,7 +125,12 @@ function initMap() {
 
     /////////////////////////////////////////////////////////////////////////////
 
+    // This is the autocomplete. right now its a child of the form element
+    // with the id "build" ... if its not appended it gets appended to the dom.
+    // if you need to change the flow ... dont forget to append where you want.
+    // i think if you just move the form around though youre fine
     $('#user-id').autocomplete({
+      appendTo: '#build',
       source: usernames
     });
     //

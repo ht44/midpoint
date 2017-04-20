@@ -141,10 +141,19 @@ h2.dialog {
   height: 100;
 }
 
+/*
+these last two are for styling the jquery autocomplete widget...
+i think the one that says input is the input field that became the autocomplete
+and the other one is the menu that pops up when you autocomplete
+*/
+
 .ui-autocomplete-input {
-  
+  width: inherit;
+  max-width: inherit;
 }
 .ui-autocomplete {
+  width: inherit;
+  max-width: inherit;
   background-color: white;
   list-style: none;
 }
