@@ -5,7 +5,7 @@ const knex = require('../db/knex');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const request = require('request');
-require('dotenv').load()
+require('dotenv').load();
 
 router.route('/')
     //index all users ** for admin only **
@@ -37,25 +37,30 @@ router.route('/')
 router.route('/:user_id/edit')
     //
     .get((req, res) => {
+      if (req.session.userId == req.params.user_id) {
+        console.log('that is you');
         knex('users')
-            .where('id', req.params.user_id)
-            .first()
-            .then(function(user) {
-                // request(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${user.home_lat},${user.home_lng}&key=${process.env.API_KEY}`, function(error, response, body){
-                //   console.log('error:', error);
-                //   console.log('statuscode: ', response && response.statusCode);
-                //   // console.log('body: ', body);
-                //   var parsedBody = JSON.parse(body);
-                //   var renderedAddress = parsedBody.results[0].formatted_address;
-                // user.address = renderedAddress;
-                // console.log(user.address);
-                // console.log(typeof user.address);
-                res.render('users/edit', {
-                    user
-                    // res.send('wow')
-                    // })
-                })
-            })
+        .where('id', req.params.user_id)
+        .first()
+        .then(function(user) {
+          // request(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${user.home_lat},${user.home_lng}&key=${process.env.API_KEY}`, function(error, response, body){
+          //   console.log('error:', error);
+          //   console.log('statuscode: ', response && response.statusCode);
+          //   // console.log('body: ', body);
+          //   var parsedBody = JSON.parse(body);
+          //   var renderedAddress = parsedBody.results[0].formatted_address;
+          // user.address = renderedAddress;
+          // console.log(user.address);
+          // console.log(typeof user.address);
+          res.render('users/edit', {
+            user
+            // res.send('wow')
+            // })
+          })
+        })
+      } else {
+        res.send('UNAUTHORIZED');
+      }
         //}
     });
 

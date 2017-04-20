@@ -170,9 +170,7 @@ function initMap() {
                     newPin.username = result.username;
                     // NONIIIIIIIIIII NHAND INSIDE BELOW WHERE IT SAYS this
                     newPin.addListener('click', function (ev) {
-                      console.log(this.username);
                       closeWindow();
-
                       infowindow = new google.maps.InfoWindow({
                           content: '<div class="info">' +
                                    '<h1>' + this.firstName + " " + this.lastName + '</h1>' +
@@ -223,11 +221,19 @@ function initMap() {
                 }, map, imageGuess);
                 newPin.userId = xhr.response.id;
                 newPin.username = xhr.response.username;
+                newPin.firstName = xhr.response.first;
+                newPin.lastName = xhr.response.last;
                 newPin.lat = parseFloat(xhr.response.current_lat);
                 newPin.lng = parseFloat(xhr.response.current_lng);
                 // NONIIIIIIIIIII NHAND INSIDE BELOW WHERE IT SAYS this
                 newPin.addListener('click', function (ev) {
-                  console.log(this);
+                  closeWindow();
+                  infowindow = new google.maps.InfoWindow({
+                      content: '<div class="info">' +
+                               '<h1>' + this.firstName + " " + this.lastName + '</h1>' +
+                               '</div>'
+                             });
+                  infowindow.open(map, this);
                 });
                 users.push(newPin);
                 meanCenter = midpoint.getMidpoint(users);

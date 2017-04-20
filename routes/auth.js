@@ -27,7 +27,11 @@ router.route('/login')
         var isUser = bcrypt.compareSync(req.body.cred.password, user.password_digest);
         if (isUser) {
           req.session.userId = user.id;
-          res.redirect('/midpoint');
+          if (user.first === null && user.last === null) {
+            res.redirect(`/users/${user.id}/edit`);
+          } else {
+            res.redirect('/midpoint');
+          }
         } else {
           res.render('auth/login', {
             message: 'WRONG PASSWORD'
