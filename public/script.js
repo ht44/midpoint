@@ -33,7 +33,7 @@ function initMap() {
         infowindow,
         circle,
         lineDistance,
-        circelSearchRadinMi = 1;
+        circelSearchRadinMi = 5;
 
 
     var map = new google.maps.Map(document.getElementById('map'), {
@@ -57,6 +57,23 @@ function initMap() {
     // map.addListener('bounds_changed', () => {
     //   searchBox.setBounds(map.getBounds());
     // });
+
+    const milesSubmit = document.getElementById('miles-submit');
+    const milesInput = document.getElementById('miles-input');
+    milesSubmit.addEventListener('click', ev => {
+      milesInt = parseInt(milesInput.value, 10);
+      circelSearchRadinMi = milesInt;
+      if (circle) circle.setMap(null);
+      circle = new google.maps.Circle({center:meanCenter,
+                                     radius: circelSearchRadinMi*1609.34,
+                                     fillOpacity: 0.35,
+                                     fillColor: "#93f293",
+                                     strokeOpacity: 0.5,
+                                     map: map});
+
+      // var bounds = circle.getBounds();
+      searchBox.setBounds(circle.getBounds());
+    });
 
     map.addListener('click', () => {
       closeWindow();
@@ -213,18 +230,6 @@ function initMap() {
                 meanCenter = midpoint.getMidpoint(users);
                 centerPin = dropPin(meanCenter, map, imagePano);
                 map.setCenter(meanCenter);
-                if (circle) circle.setMap(null);
-                circle = new google.maps.Circle({center:meanCenter,
-                                               radius: circelSearchRadinMi*1609.34,
-                                               fillOpacity: 0.35,
-                                               fillColor: "#93f293",
-                                               strokeOpacity: 0.5,
-                                               map: map});
-
-                // var bounds = circle.getBounds();
-                searchBox.setBounds(circle.getBounds());
-                // below is a new function which updates the ui to list all users
-                // see step1.js line 46 for more info
                 addUsersToCount(xhr.response);
             }
         };
@@ -279,16 +284,6 @@ function initMap() {
                 users.push(newPin);
                 meanCenter = midpoint.getMidpoint(users);
                 centerPin = dropPin(meanCenter, map, imagePano);
-                if (circle) circle.setMap(null);
-                circle = new google.maps.Circle({center:meanCenter,
-                                               radius: circelSearchRadinMi*1609.34,
-                                               fillOpacity: 0.35,
-                                               fillColor: "#93f293",
-                                               strokeOpacity: 0.5,
-                                               map: map});
-
-                // var bounds = circle.getBounds();
-                searchBox.setBounds(circle.getBounds());
                 map.setCenter(meanCenter);
             }
         };
@@ -304,16 +299,6 @@ function initMap() {
         centerPin.setMap(null);
         meanCenter = midpoint.getMidpoint(users);
         centerPin = dropPin(meanCenter, map, imagePano);
-        if (circle) circle.setMap(null);
-        circle = new google.maps.Circle({center:meanCenter,
-                                       radius: circelSearchRadinMi*1609.34,
-                                       fillOpacity: 0.35,
-                                       fillColor: "#93f293",
-                                       strokeOpacity: 0.5,
-                                       map: map});
-
-        // var bounds = circle.getBounds();
-        searchBox.setBounds(circle.getBounds());
         removeUserFromCount();
       }
     });
