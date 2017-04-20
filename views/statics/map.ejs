@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
     <%- include('../partials/head'); %>
+    <link href="style/map.css" type="text/css" rel="stylesheet" />
     <link href="style/step1.css" type="text/css" rel="stylesheet" />
+    <link href="style/step2.css" type="text/css" rel="stylesheet" />
+    <link href="style/step3.css" type="text/css" rel="stylesheet" />
     <title>Home | Midpoint</title>
     <!-- this is the jquery ui cdn i used to make the autocomplete -->
     <!-- all the other scripts are at the bottom now. it fixed the load order.
@@ -29,54 +32,15 @@
   -->
     <div id="map"></div>
     <%- include('../partials/steps', {currentStep: 1}); %>
-    <h1 class="dialog">Who's Joining?</h1>
-    <h2 class="dialog">Create a group - and meet in the middle!</h2>
-    <div class="blue">
-      <div class="blue-content">
-        <form id="controls" class="box" method="GET">
-          <h4>select a group</h4>
-          <%# <input id="group-id" type="text" name="type" placeholder="Group Name">
-          <button id="add-group" type="submit">Load Group</button>%>
-          <a href="#" id="group-selector">My Groups</a>
-
-          <div id="group-menu">
-            <ul id="groups">
-              <% groups.forEach(group => { %>
-                <li id="<%=group.id%>" class="selected">
-                  <%=group.name%>
-                </li>
-              <% }); %>
-              <li><a class="selected" href="#">My Groups</a></li>
-            </ul>
-          </div>
-
-        </form>
-        <form id="build" class="box" method="GET">
-          <h4>build a group</h4>
-          <input id="user-id" type="text" name="type" placeholder="Username">
-          <button id="add-user" type="submit">Add User</button>
-          <button id="remove-user" type="button">Remove User</button>
-        </form>
-        <div id="people" class="box">
-          <h4><span id="people-count">5</span> people added</h4>
-          <a href="#" id="people-save">+ Save as a New Group</a>
-        </div>
-        <!-- commenting out the <form> fixed so now you can hit enter when
-        youre searching for places and it wont go to a new page
-        -->
-        <!-- <form> -->
-          <input id="search-box" type="text" placeholder="Search Box">
-        <!-- </form> -->
-        <form id="group-save" class="box" method="POST">
-          <h4>save new group as </h4>
-          <input id="group-name" type="text" placeholder="Group Name">
-          <button id="save-group" class="submit">Create New Group</button>
-        </form>
-      </div>
-    </div>
+    <%- include('../partials/step1', {groups: groups}); %>
+    <%- include('../partials/step2'); %>
+    <%- include('../partials/step3'); %>
+    <%- include('../partials/footer'); %>
     <script src="math.js" charset="utf-8"></script>
     <script src="script.js" charset="utf-8"></script>
-    <script src="script/step1.js" charset="utf-8"></script>
+    <script src="script/step1.js"></script>
+    <script src="script/step2.js"></script>
+    <script src="script/step3.js"></script>
     <script async defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%=apiKey%>&libraries=places&callback=initMap"></script>
 </body>
 </html>
