@@ -1,0 +1,45 @@
+<div class="step" id="step-1">
+  <h1 class="dialog">Who's Joining?</h1>
+  <h2 class="dialog">Create a group - and meet in the middle!</h2>
+  <div class="blue">
+    <div class="blue-content">
+      <form id="controls" class="box" method="GET">
+        <h4>select a group</h4>
+        <%# <input id="group-id" type="text" name="type" placeholder="Group Name">
+        <button id="add-group" type="submit">Load Group</button>%>
+        <a href="#" id="group-selector">My Groups</a>
+
+        <div id="group-menu">
+          <ul id="groups">
+            <% groups.forEach(group => { %>
+              <li id="<%=group.id%>" class="selected">
+                <%=group.name%>
+              </li>
+            <% }); %>
+            <li><a class="selected" href="#">My Groups</a></li>
+          </ul>
+        </div>
+
+      </form>
+      <form id="build" class="box" method="GET">
+        <h4>build a group</h4>
+        <input id="user-id" type="text" name="type" placeholder="Username">
+        <button id="add-user" type="submit">Add User</button>
+        <button id="remove-user" type="button">Remove User</button>
+      </form>
+      <div id="people" class="box">
+        <h4><span id="people-count">0</span> people added</h4>
+        <ul id="people-list"></ul>
+        <a href="#" id="people-save">+ Save as a New Group</a>
+      </div>
+      <form id="group-save" class="box" method="POST">
+        <h4>save new group as </h4>
+        <input id="group-name" type="text" placeholder="Group Name">
+        <button id="save-group" class="submit">Create New Group</button>
+      </form>
+      <div class="buttons">
+        <button id="step-1-button" class="submit">Next</button>
+      </div>
+    </div>
+  </div>
+</div>

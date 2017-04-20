@@ -9,7 +9,18 @@
 #people {
   clear: both;
   float: left;
-  padding: 20px 0;
+  padding: 40px 0;
+}
+
+#people-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#people-list li {
+  margin: 0;
+  padding: 10px 0;
 }
 
 #group-menu {
@@ -19,7 +30,7 @@
   position: absolute;
   width: 300px;
 }
-
+/*
 #group-menu a {
   background-color: #232a88;
   display: block;
@@ -28,7 +39,7 @@
 
 #group-menu a.selected {
   color: #fff;
-}
+}*/
 
 #group-menu li {
   background-color: #232a88;
@@ -36,7 +47,6 @@
   display: block;
   padding: 10px 20px;
   margin: 0;
-  padding: 0;
 }
 
 #group-menu ul {
@@ -60,5 +70,15 @@
 }
 
 .box {
-  width: 50%;
+  width: 300px;
+}
+
+.buttons {
+  clear: both;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.buttons button {
+  width: 100px;
 }
