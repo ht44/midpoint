@@ -4,6 +4,9 @@
     <%- include('../partials/head'); %>
     <link href="style/step1.css" type="text/css" rel="stylesheet" />
     <title>Home | Midpoint</title>
+    <!-- this is the jquery ui cdn i used to make the autocomplete -->
+    <!-- all the other scripts are at the bottom now. it fixed the load order.
+    i'm sure there's a better way but i just went with it so SCROLL DOWN FOR THAT! -->
     <script
     src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
     integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
@@ -75,6 +78,5 @@
     <script src="script.js" charset="utf-8"></script>
     <script src="script/step1.js" charset="utf-8"></script>
     <script async defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%=apiKey%>&libraries=places&callback=initMap"></script>
-    <!-- this is the jquery ui cdn i used to make the autocomplete -->
 </body>
 </html>

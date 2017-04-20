@@ -145,6 +145,11 @@ h2.dialog {
 these last two are for styling the jquery autocomplete widget...
 i think the one that says input is the input field that became the autocomplete
 and the other one is the menu that pops up when you autocomplete
+
+its bound to a form element with the id "build"
+it itself is the input element within that form i think
+something something something
+mvp baby
 */
 
 .ui-autocomplete-input {
