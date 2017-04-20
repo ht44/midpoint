@@ -2,7 +2,8 @@ function initMap() {
 
     var imageYrLoc = 'http://maps.google.com/mapfiles/kml/pal2/icon10.png',
         imageGuess = 'http://maps.google.com/mapfiles/kml/pal4/icon53.png',
-        imagePano = 'http://maps.google.com/mapfiles/kml/pal4/icon61.png';
+        // imagePano = 'http://maps.google.com/mapfiles/kml/pal4/icon61.png',
+        imagePano = 'http://maps.google.com/mapfiles/kml/pal3/icon20.png'
 
     var geo = navigator.geolocation;
     var usernames = [];
@@ -29,11 +30,14 @@ function initMap() {
         myPin,
         users = [],
         places = [],
-        infowindow;
+        infowindow,
+        circle,
+        lineDistance;
+
 
     var map = new google.maps.Map(document.getElementById('map'), {
         center: meanCenter,
-        zoom: 9,
+        zoom: 10,
         mapTypeId: 'roadmap',
         streetViewControl: false,
         mapTypeControl: false,
@@ -61,6 +65,16 @@ function initMap() {
             place.setMap(null);
           });
           places = [];
+          closePlacesAr = [];
+
+          if (circle) circle.setMap(null);
+          circle = new google.maps.Circle({center:centerPin.getPosition(),
+                                         radius: 8047,
+                                         fillOpacity: 0.35,
+                                         fillColor: "#93f293",
+                                         strokeOpacity: 0.5,
+                                         map: map});
+
           results.forEach(result => {
             var newPlace,
               icon = {
@@ -70,13 +84,15 @@ function initMap() {
               anchor: new google.maps.Point(17, 34),
               scaledSize: new google.maps.Size(25, 25)
             };
+
             newPlace = dropPin(result.geometry.location, map, icon);
+
             newPlace.title = result.name;
             newPlace.placeId = result.place_id;
             newPlace.addListener('click', function() {
               closeWindow();
               service.getDetails({placeId: this.placeId}, (details, status) => {
-                console.log(details);
+
                 infowindow = new google.maps.InfoWindow({
                     content: '<div class="info">' +
                              '<h1>' + details.name + '</h1>' +
@@ -98,10 +114,17 @@ function initMap() {
                              '<div id="bodyContent">'+
                              '</div>'
                            });
-                infowindow.open(map, newPlace);
+                infowindow.open(map, this);
               });
             });
-            places.push(newPlace);
+
+            lineDistance = (calculatingDistance(meanCenter, result.geometry.location));
+            if(lineDistance<5){
+                places.push(newPlace);
+            } else {
+                newPlace.setMap(null);
+                newPlace = null;
+            }
           });
     });
 
@@ -318,4 +341,40 @@ function initMap() {
       }
     }
     /////////////////////////////////////////////////////////////////////////////
+    function calculatingDistance(userInput, theTargetInput) {
+        var lineOfDifferece = new google.maps.Polyline({
+            path: [userInput, theTargetInput],
+            geodesic: true,
+            strokeColor: 'transparent',
+            strokeOpacity: .9,
+            strokeWeight: 2
+        });
+
+        // calculating distance of line
+        lineOfDifferece.setMap(map);
+        google.maps.LatLng.prototype.kmTo = function(a) {
+            var e = Math,
+                ra = e.PI / 180;
+            var b = this.lat() * ra,
+                c = a.lat() * ra,
+                d = b - c;
+            var g = this.lng() * ra - a.lng() * ra;
+            var f = 2 * e.asin(e.sqrt(e.pow(e.sin(d / 2), 2) + e.cos(b) * e.cos(c) * e.pow(e.sin(g / 2), 2)));
+            return f * 6378.137;
+        }
+
+        google.maps.Polyline.prototype.inKm = function(n) {
+            var a = this.getPath(n),
+                len = a.getLength(),
+                dist = 0;
+            for (var i = 0; i < len - 1; i++) {
+                dist += a.getAt(i).kmTo(a.getAt(i + 1));
+            }
+            return dist;
+        }
+            return lineOfDifferece.inKm() * .621371192
+
+    }
+    /////////////////////////////////////////////////////////////////////////////
+
 }
