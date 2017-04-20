@@ -11,8 +11,8 @@ router.route('/users')
   })
 
   .get((req, res) => {
-    knex.select('username').from('users').then(usernames => {
-      res.send(usernames);
+    knex.select('username', 'email', 'first', 'last').from('users').then(users => {
+      res.send(users);
     });
   });
 
