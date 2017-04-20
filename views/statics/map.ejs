@@ -31,10 +31,11 @@
     </div>
   -->
     <div id="map"></div>
-    <%- include('../partials/steps', {currentStep: 1}); %>
-    <%- include('../partials/step1', {groups: groups}); %>
-    <%- include('../partials/step2'); %>
-    <%- include('../partials/step3'); %>
+    <div id="map-steps">
+      <%- include('../partials/step1', {groups: groups}); %>
+      <%- include('../partials/step2'); %>
+      <%- include('../partials/step3'); %>
+    </div>
     <%- include('../partials/footer'); %>
     <script src="math.js" charset="utf-8"></script>
     <script src="script.js" charset="utf-8"></script>

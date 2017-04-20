@@ -37,7 +37,7 @@ router.route('/:group_id')
             .from('users_groups')
             .where('group_id', req.params.group_id)
             .join('users', 'users_groups.user_id', '=', 'users.id')
-            .select('username')
+            .select('first', 'last')
             .then((allUserinGroup) => {
                 knex('groups')
                     .select('name')

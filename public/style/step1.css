@@ -1,14 +1,37 @@
-#controls {
-  float: left;
+#step-1-button {
+  float: right;
+  border-radius: 5px;
 }
 
 #build {
+  padding-top: 20px;
+}
+
+#build button {
+  width: 48%;
+  margin: 10px 0 0 0;
+}
+
+#build button:first-of-type {
+  float: left;
+}
+
+#build button:last-of-type {
   float: right;
+}
+
+#map-steps {
+  background-color: rgba(255, 255, 255, .8);
+  position: absolute;
+  height: calc(100% - 100px);
+  left: 0px;
+  overflow: auto;
+  top: 50px;
+  width: 350px;
 }
 
 #people {
   clear: both;
-  float: left;
   padding: 40px 0;
 }
 
@@ -42,11 +65,16 @@
 }*/
 
 #group-menu li {
-  background-color: #232a88;
+  background-color: #0791d0;
   color: #fff;
+  cursor: pointer;
   display: block;
   padding: 10px 20px;
   margin: 0;
+}
+
+#group-menu li:hover {
+  background-color: #069fe5;
 }
 
 #group-menu ul {
@@ -57,12 +85,14 @@
 
 #group-save {
   display: none;
-  float: right;
   padding: 20px 0;
+  padding-right: 0;
+  padding-left: 0;
 }
 
 #group-selector {
-  background-color: #171c61;
+  background-color: #00b1fd;
+  border-radius: 5px;
   display: inline-block;
   color: #FFF;
   padding: 20px;
@@ -81,4 +111,11 @@
 
 .buttons button {
   width: 100px;
+}
+
+img.down {
+  height: 20px;
+  float:right;
+  vertical-align: middle;
+  width: 20px;
 }

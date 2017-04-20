@@ -2,7 +2,8 @@ function initMap() {
 
     var imageYrLoc = 'http://maps.google.com/mapfiles/kml/pal2/icon10.png',
         imageGuess = 'http://maps.google.com/mapfiles/kml/pal4/icon53.png',
-        imagePano = 'http://maps.google.com/mapfiles/kml/pal4/icon61.png';
+        // imagePano = 'http://maps.google.com/mapfiles/kml/pal4/icon61.png',
+        imagePano = 'http://maps.google.com/mapfiles/kml/pal3/icon20.png'
 
     var geo = navigator.geolocation;
     var usernames = [];
@@ -29,11 +30,15 @@ function initMap() {
         myPin,
         users = [],
         places = [],
-        infowindow;
+        infowindow,
+        circle,
+        lineDistance,
+        circelSearchRadinMi = 5;
+
 
     var map = new google.maps.Map(document.getElementById('map'), {
         center: meanCenter,
-        zoom: 9,
+        zoom: 10,
         mapTypeId: 'roadmap',
         streetViewControl: false,
         mapTypeControl: false,
@@ -42,13 +47,54 @@ function initMap() {
     });
 
     var input = document.getElementById('search-box');
-    var searchBox = new google.maps.places.SearchBox(input);
+    var searchBox = new google.maps.places.SearchBox(input, {
+      restrictBounds: true
+    });
     // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
     var service = new google.maps.places.PlacesService(map);
 
-    map.addListener('bounds_changed', () => {
-      searchBox.setBounds(map.getBounds());
+    // map.addListener('bounds_changed', () => {
+    //   searchBox.setBounds(map.getBounds());
+    // });
+    //
+    const nextButton = document.getElementById('step-1-button');
+    nextButton.addEventListener('click', ev => {
+        if (circle) circle.setMap(null);
+        circle = new google.maps.Circle({center:meanCenter,
+                                       radius: circelSearchRadinMi*1609.34,
+                                       fillOpacity: 0.35,
+                                       fillColor: "#93f293",
+                                       strokeOpacity: 0.5,
+                                       map: map});
+        // var bounds = circle.getBounds();
+        searchBox.setBounds(circle.getBounds());
+    });
+
+    const backButton = document.getElementById('step-2-back-button');
+    backButton.addEventListener('click', ev => {
+        circle.setMap(null);
+        places.forEach(place=>{
+            place.setMap(null);
+        })
+        places = [];
+    });
+
+    const milesSubmit = document.getElementById('miles-submit');
+    const milesInput = document.getElementById('miles-input');
+    milesSubmit.addEventListener('click', ev => {
+      milesInt = parseInt(milesInput.value, 10);
+      circelSearchRadinMi = milesInt;
+      if (circle) circle.setMap(null);
+      circle = new google.maps.Circle({center:meanCenter,
+                                     radius: circelSearchRadinMi*1609.34,
+                                     fillOpacity: 0.35,
+                                     fillColor: "#93f293",
+                                     strokeOpacity: 0.5,
+                                     map: map});
+
+      // var bounds = circle.getBounds();
+      searchBox.setBounds(circle.getBounds());
     });
 
     map.addListener('click', () => {
@@ -61,6 +107,7 @@ function initMap() {
             place.setMap(null);
           });
           places = [];
+
           results.forEach(result => {
             var newPlace,
               icon = {
@@ -70,31 +117,53 @@ function initMap() {
               anchor: new google.maps.Point(17, 34),
               scaledSize: new google.maps.Size(25, 25)
             };
+
             newPlace = dropPin(result.geometry.location, map, icon);
+
             newPlace.title = result.name;
             newPlace.placeId = result.place_id;
             newPlace.addListener('click', function() {
               closeWindow();
               service.getDetails({placeId: this.placeId}, (details, status) => {
-                console.log(details);
+
                 infowindow = new google.maps.InfoWindow({
                     content: '<div class="info">' +
                              '<h1>' + details.name + '</h1>' +
                              '<h3>' + details.rating + ' Stars</h3>' +
                              '<p>' + details.formatted_address + '</p>' +
                              '<h1>' + details.formatted_phone_number + '</h1>' +
-                             '<h3>' + details.opening_hours.weekday_text + '</h3>' +
-                             '<h3>' + details.photos[1].html_attributions + '</h3>' +
+                             '<a target="_blank" href =' + details.website + '>' + '<h2>' + 'website ' + '</h2>' + '</a>' +
+                             '<h3>' + details.opening_hours.weekday_text[0] + '</h3>' +
+                             '<h3>' + details.opening_hours.weekday_text[1] + '</h3>' +
+                             '<h3>' + details.opening_hours.weekday_text[2] + '</h3>' +
+                             '<h3>' + details.opening_hours.weekday_text[3] + '</h3>' +
+                             '<h3>' + details.opening_hours.weekday_text[4] + '</h3>' +
+                             '<h3>' + details.opening_hours.weekday_text[5] + '</h3>' +
+                             '<h3>' + details.opening_hours.weekday_text[6] + '</h3>' +
+
+
 
                             //  '<a href=' + details.website + '</a>' +
                              '<div id="bodyContent">'+
                              '</div>'
                            });
-                infowindow.open(map, newPlace);
+                infowindow.open(map, this);
               });
             });
-            places.push(newPlace);
+
+            lineDistance = (calculatingDistance(meanCenter, result.geometry.location));
+            if(lineDistance<circelSearchRadinMi){
+                places.push(newPlace);
+            } else {
+                newPlace.setMap(null);
+                newPlace = null;
+            }
           });
+    });
+
+    $('#user-id').autocomplete({
+      appendTo: '#build',
+      source: usernames
     });
 
     var locate = new Promise((resolve, reject) => {
@@ -134,10 +203,7 @@ function initMap() {
     // i think if you just move the <form> around though youre fine
     //
 
-    $('#user-id').autocomplete({
-      appendTo: '#build',
-      source: usernames
-    });
+
 
     const addGroup = document.getElementById('groups');
     addGroup.addEventListener('click', (ev) => {
@@ -186,9 +252,7 @@ function initMap() {
                 meanCenter = midpoint.getMidpoint(users);
                 centerPin = dropPin(meanCenter, map, imagePano);
                 map.setCenter(meanCenter);
-                // below is a new function which updates the ui to list all users
-                // see step1.js line 46 for more info
-                addUsers(xhr.response);
+                addUsersToCount(xhr.response);
             }
         };
         xhr.open('GET', `http://localhost:3000/locations/groups/${groupId}`);
@@ -227,6 +291,8 @@ function initMap() {
                 newPin.lastName = xhr.response.last;
                 newPin.lat = parseFloat(xhr.response.current_lat);
                 newPin.lng = parseFloat(xhr.response.current_lng);
+                // this is what UPDATES THE COUNT
+                addUserToCount(xhr.response.first, xhr.response.last);
                 // NONIIIIIIIIIII NHAND INSIDE BELOW WHERE IT SAYS this
                 newPin.addListener('click', function (ev) {
                   closeWindow();
@@ -255,6 +321,7 @@ function initMap() {
         centerPin.setMap(null);
         meanCenter = midpoint.getMidpoint(users);
         centerPin = dropPin(meanCenter, map, imagePano);
+        removeUserFromCount();
       }
     });
 
@@ -262,6 +329,9 @@ function initMap() {
     const groupName = document.getElementById('group-name');
     const saveGroup = document.getElementById('save-group');
     saveGroup.addEventListener('click', (ev) => {
+      if (groupName.value == '') {
+        return;
+      }
       ev.preventDefault();
       var newGroup = [];
       users.forEach(user => {
@@ -276,7 +346,7 @@ function initMap() {
       xhr.responseType = 'json';
       xhr.onreadystatechange = () => {
         if (xhr.readyState === 4) {
-          console.log(xhr.status);
+          window.location.reload(true);
         }
       }
       xhr.open('POST', 'http://localhost:3000/locations/groups');
@@ -302,4 +372,40 @@ function initMap() {
       }
     }
     /////////////////////////////////////////////////////////////////////////////
+    function calculatingDistance(userInput, theTargetInput) {
+        var lineOfDifferece = new google.maps.Polyline({
+            path: [userInput, theTargetInput],
+            geodesic: true,
+            strokeColor: 'transparent',
+            strokeOpacity: .9,
+            strokeWeight: 2
+        });
+
+        // calculating distance of line
+        lineOfDifferece.setMap(map);
+        google.maps.LatLng.prototype.kmTo = function(a) {
+            var e = Math,
+                ra = e.PI / 180;
+            var b = this.lat() * ra,
+                c = a.lat() * ra,
+                d = b - c;
+            var g = this.lng() * ra - a.lng() * ra;
+            var f = 2 * e.asin(e.sqrt(e.pow(e.sin(d / 2), 2) + e.cos(b) * e.cos(c) * e.pow(e.sin(g / 2), 2)));
+            return f * 6378.137;
+        }
+
+        google.maps.Polyline.prototype.inKm = function(n) {
+            var a = this.getPath(n),
+                len = a.getLength(),
+                dist = 0;
+            for (var i = 0; i < len - 1; i++) {
+                dist += a.getAt(i).kmTo(a.getAt(i + 1));
+            }
+            return dist;
+        }
+            return lineOfDifferece.inKm() * .621371192
+
+    }
+    /////////////////////////////////////////////////////////////////////////////
+
 }

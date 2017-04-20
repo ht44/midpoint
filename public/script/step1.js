@@ -1,28 +1,5 @@
 $(document).ready(function(){
-  var availableTags = [
-  "ActionScript",
-  "AppleScript",
-  "Asp",
-  "BASIC",
-  "C",
-  "C++",
-  "Clojure",
-  "COBOL",
-  "ColdFusion",
-  "Erlang",
-  "Fortran",
-  "Groovy",
-  "Haskell",
-  "Java",
-  "JavaScript",
-  "Lisp",
-  "Perl",
-  "PHP",
-  "Python",
-  "Ruby",
-  "Scala",
-  "Scheme"
-];
+
   $('#people a').click(function(event){
     event.preventDefault()
     $('#group-save').toggle()
@@ -35,11 +12,17 @@ $(document).ready(function(){
 
   $('#group-menu li').click(function(event) {
     event.preventDefault()
-    $('#group-selector').text($(this).text())
+    $('#group-selector span').text($(this).text())
     $('#group-menu').hide()
     $('#group-menu li').removeClass('selected')
     $(this).addClass('selected')
   })
+
+  $('#group-menu a').click(event => {
+    // $('#group-menu').toggle();
+    $('#people-list').empty();
+    $('#people-count').text('0');
+  });
 
   $('#step-1-button').click(function(event) {
     event.preventDefault()
@@ -54,9 +37,11 @@ $(document).ready(function(){
   $('#checkmark-3 img').last().show();
 })
 
+
+
 // receives users (after group is select or users are individually added) from map.ejs
 // and then updates the # of people added to display "# people added"
-function addUsers(users) {
+function addUsersToCount(users) {
   $('#people-count').text(users.length);
   // this empties the list "people-count" to start
   $('#people-list').empty();
@@ -68,4 +53,24 @@ function addUsers(users) {
     // append it to the peole-list element
     $('#people-list').append(person);
   })
+}
+
+function addUserToCount(firstName, lastName) {
+  // $('#people-count').text(users.length);
+  var peopleCount = $('#people-count').text();
+  peopleCount = parseInt(peopleCount, 10);
+  ++peopleCount;
+  $('#people-count').text(peopleCount);
+  console.log(peopleCount, typeof peopleCount);
+  var person = $(document.createElement('li'));
+  person.text(firstName + ' ' + lastName);
+  $('#people-list').append(person);
+}
+
+function removeUserFromCount() {
+  var peopleCount = $('#people-count').text();
+  peopleCount = parseInt(peopleCount, 10);
+  --peopleCount;
+  $('#people-count').text(peopleCount);
+  $('#people-list li:last').remove();
 }
