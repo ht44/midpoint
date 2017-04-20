@@ -59,10 +59,6 @@ h4 {
   padding: 0 0 20px 0;
 }
 
-#info h1 {
-  color: #73b45f;
-}
-
 input {
   background-color: #fff;
   font-size: 12px;
@@ -89,6 +85,29 @@ section input {
 section label {
   display: inline-block;
   width: 150px;
+}
+
+#my-groups {
+  padding-left: 10px;
+}
+
+#all-groups {
+  list-style-type: none;
+  margin: 0px auto;
+  max-width: 500px;
+}
+
+#all-groups li {
+  clear: both;
+}
+
+#all-groups li span {
+  float: left
+}
+
+#all-groups li form {
+  float: right;
+  padding-bottom: 10px;
 }
 
 #map {

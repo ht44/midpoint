@@ -8,17 +8,18 @@
   </head>
   <body>
     <%- include('../partials/navbar'); %>
-      <h1>These are your your groups</h1>
-      <ul>
+      <h2 id="my-groups">My Groups</h2>
+      <ul id="all-groups">
         <%groupsJoi.forEach(function(thing){ %>
           <li>
-
-              <%=thing.name%>
-              <!-- <a href="/groups/<%=thing.group_id%>/">Group Deets</a> -->
+            <div>
+              <span><%=thing.name%></span>
+            <!-- <a href="/groups/<%=thing.group_id%>/">Group Deets</a> -->
               <form action="/groups/<%= thing.group_id %>?_method=DELETE" method="POST">
-                <button type="submit" value="Delete Group">Delete Group</button>
-              </form>
-          </li>
+              <button type="submit" value="Delete Group">Delete Group</button>
+            </form>
+          </div>
+        </li>
       <%})%>
   </ul>
 
