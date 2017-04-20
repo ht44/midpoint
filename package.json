@@ -3,8 +3,14 @@
   "version": "1.0.0",
   "description": "Centrographic measure",
   "main": "server.js",
-  "scripts": {
-    "test": "mocha ./test/integrations"
+    "scripts": {
+      "knex": "knex",
+      "heroku-postbuild": "knex migrate:latest",
+       "nf": "nf start",
+      "nodemon": "nodemon server.js"
+  },
+    "engine": {
+    "node": "6.9.5"
   },
   "repository": {
     "type": "git",
