@@ -227,6 +227,8 @@ function initMap() {
                 newPin.lastName = xhr.response.last;
                 newPin.lat = parseFloat(xhr.response.current_lat);
                 newPin.lng = parseFloat(xhr.response.current_lng);
+                // this is what UPDATES THE COUNT
+                addUserToCount(xhr.response.first, xhr.response.last);
                 // NONIIIIIIIIIII NHAND INSIDE BELOW WHERE IT SAYS this
                 newPin.addListener('click', function (ev) {
                   closeWindow();
@@ -255,6 +257,7 @@ function initMap() {
         centerPin.setMap(null);
         meanCenter = midpoint.getMidpoint(users);
         centerPin = dropPin(meanCenter, map, imagePano);
+        removeUserFromCount();
       }
     });
 
