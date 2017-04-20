@@ -99,8 +99,16 @@ function initMap() {
                              '<h3>' + details.rating + ' Stars</h3>' +
                              '<p>' + details.formatted_address + '</p>' +
                              '<h1>' + details.formatted_phone_number + '</h1>' +
-                             '<h3>' + details.opening_hours.weekday_text + '</h3>' +
-                             '<h3>' + details.photos[1].html_attributions + '</h3>' +
+                             '<a target="_blank" href =' + details.website + '>' + '<h2>' + 'website ' + '</h2>' + '</a>' +
+                             '<h3>' + details.opening_hours.weekday_text[0] + '</h3>' +
+                             '<h3>' + details.opening_hours.weekday_text[1] + '</h3>' +
+                             '<h3>' + details.opening_hours.weekday_text[2] + '</h3>' +
+                             '<h3>' + details.opening_hours.weekday_text[3] + '</h3>' +
+                             '<h3>' + details.opening_hours.weekday_text[4] + '</h3>' +
+                             '<h3>' + details.opening_hours.weekday_text[5] + '</h3>' +
+                             '<h3>' + details.opening_hours.weekday_text[6] + '</h3>' +
+
+
 
                             //  '<a href=' + details.website + '</a>' +
                              '<div id="bodyContent">'+
@@ -118,6 +126,11 @@ function initMap() {
                 newPlace = null;
             }
           });
+    });
+
+    $('#user-id').autocomplete({
+      appendTo: '#build',
+      source: usernames
     });
 
     var locate = new Promise((resolve, reject) => {
@@ -157,10 +170,7 @@ function initMap() {
     // i think if you just move the <form> around though youre fine
     //
 
-    $('#user-id').autocomplete({
-      appendTo: '#build',
-      source: usernames
-    });
+
 
     const addGroup = document.getElementById('groups');
     addGroup.addEventListener('click', (ev) => {
@@ -211,7 +221,7 @@ function initMap() {
                 map.setCenter(meanCenter);
                 // below is a new function which updates the ui to list all users
                 // see step1.js line 46 for more info
-                addUsers(xhr.response);
+                addUsersToCount(xhr.response);
             }
         };
         xhr.open('GET', `http://localhost:3000/locations/groups/${groupId}`);
@@ -250,6 +260,8 @@ function initMap() {
                 newPin.lastName = xhr.response.last;
                 newPin.lat = parseFloat(xhr.response.current_lat);
                 newPin.lng = parseFloat(xhr.response.current_lng);
+                // this is what UPDATES THE COUNT
+                addUserToCount(xhr.response.first, xhr.response.last);
                 // NONIIIIIIIIIII NHAND INSIDE BELOW WHERE IT SAYS this
                 newPin.addListener('click', function (ev) {
                   closeWindow();
@@ -278,6 +290,7 @@ function initMap() {
         centerPin.setMap(null);
         meanCenter = midpoint.getMidpoint(users);
         centerPin = dropPin(meanCenter, map, imagePano);
+        removeUserFromCount();
       }
     });
 
@@ -285,6 +298,9 @@ function initMap() {
     const groupName = document.getElementById('group-name');
     const saveGroup = document.getElementById('save-group');
     saveGroup.addEventListener('click', (ev) => {
+      if (groupName.value == '') {
+        return;
+      }
       ev.preventDefault();
       var newGroup = [];
       users.forEach(user => {
@@ -299,7 +315,7 @@ function initMap() {
       xhr.responseType = 'json';
       xhr.onreadystatechange = () => {
         if (xhr.readyState === 4) {
-          console.log(xhr.status);
+          window.location.reload(true);
         }
       }
       xhr.open('POST', 'http://localhost:3000/locations/groups');

@@ -1,14 +1,19 @@
-#controls {
-  float: left;
+#build {
+  padding-top: 20px;
 }
 
-#build {
-  float: right;
+#map-steps {
+  background-color: rgba(255, 255, 255, .7);
+  position: absolute;
+  height: calc(100% - 100px);
+  left: 0px;
+  overflow: auto;
+  top: 50px;
+  width: 350px;
 }
 
 #people {
   clear: both;
-  float: left;
   padding: 40px 0;
 }
 
@@ -44,9 +49,14 @@
 #group-menu li {
   background-color: #232a88;
   color: #fff;
+  cursor: pointer;
   display: block;
   padding: 10px 20px;
   margin: 0;
+}
+
+#group-menu li:hover {
+  background-color: #331db3;
 }
 
 #group-menu ul {
@@ -57,12 +67,12 @@
 
 #group-save {
   display: none;
-  float: right;
   padding: 20px 0;
 }
 
 #group-selector {
-  background-color: #171c61;
+  background-color: #00b1fd;
+  border-radius: 5px;
   display: inline-block;
   color: #FFF;
   padding: 20px;
@@ -81,4 +91,11 @@
 
 .buttons button {
   width: 100px;
+}
+
+img.down {
+  height: 20px;
+  float:right;
+  vertical-align: middle;
+  width: 20px;
 }
