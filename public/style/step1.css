@@ -1,9 +1,14 @@
+#step-1-button {
+  float: right;
+  border-radius: 5px;
+}
+
 #build {
   padding-top: 20px;
 }
 
 #map-steps {
-  background-color: rgba(255, 255, 255, .7);
+  background-color: rgba(255, 255, 255, .8);
   position: absolute;
   height: calc(100% - 100px);
   left: 0px;
@@ -68,6 +73,8 @@
 #group-save {
   display: none;
   padding: 20px 0;
+  padding-right: 0;
+  padding-left: 0;
 }
 
 #group-selector {
