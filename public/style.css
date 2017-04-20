@@ -19,7 +19,9 @@ body, html {
 
 button {
   border: none;
+  cursor: pointer;
   font-size: 12px;
+  border-radius: 5px;
   padding: 20px;
   text-transform: uppercase;
 }
@@ -184,7 +186,7 @@ mvp baby
 }
 
 .ui-menu li {
-  background-color: #232a88;
+  background-color: #0791d0;
   color: #fff;
   cursor: pointer;
   display: block;
@@ -193,5 +195,5 @@ mvp baby
 }
 
 .ui-menu li:hover {
-  background-color: #331db3;
+  background-color: #069fe5;
 }

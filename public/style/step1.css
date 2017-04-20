@@ -7,6 +7,19 @@
   padding-top: 20px;
 }
 
+#build button {
+  width: 48%;
+  margin: 10px 0 0 0;
+}
+
+#build button:first-of-type {
+  float: left;
+}
+
+#build button:last-of-type {
+  float: right;
+}
+
 #map-steps {
   background-color: rgba(255, 255, 255, .8);
   position: absolute;
@@ -52,7 +65,7 @@
 }*/
 
 #group-menu li {
-  background-color: #232a88;
+  background-color: #0791d0;
   color: #fff;
   cursor: pointer;
   display: block;
@@ -61,7 +74,7 @@
 }
 
 #group-menu li:hover {
-  background-color: #331db3;
+  background-color: #069fe5;
 }
 
 #group-menu ul {
