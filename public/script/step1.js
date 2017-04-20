@@ -35,7 +35,7 @@ $(document).ready(function(){
 
   $('#group-menu li').click(function(event) {
     event.preventDefault()
-    $('#group-selector').text($(this).text())
+    $('#group-selector span').text($(this).text())
     $('#group-menu').hide()
     $('#group-menu li').removeClass('selected')
     $(this).addClass('selected')
