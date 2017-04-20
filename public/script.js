@@ -46,14 +46,16 @@ function initMap() {
     });
 
     var input = document.getElementById('search-box');
-    var searchBox = new google.maps.places.SearchBox(input);
+    var searchBox = new google.maps.places.SearchBox(input, {
+      restrictBounds: true
+    });
     // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
     var service = new google.maps.places.PlacesService(map);
 
-    map.addListener('bounds_changed', () => {
-      searchBox.setBounds(map.getBounds());
-    });
+    // map.addListener('bounds_changed', () => {
+    //   searchBox.setBounds(map.getBounds());
+    // });
 
     map.addListener('click', () => {
       closeWindow();
@@ -65,15 +67,6 @@ function initMap() {
             place.setMap(null);
           });
           places = [];
-          closePlacesAr = [];
-
-          if (circle) circle.setMap(null);
-          circle = new google.maps.Circle({center:centerPin.getPosition(),
-                                         radius: 8047,
-                                         fillOpacity: 0.35,
-                                         fillColor: "#93f293",
-                                         strokeOpacity: 0.5,
-                                         map: map});
 
           results.forEach(result => {
             var newPlace,
@@ -219,6 +212,16 @@ function initMap() {
                 meanCenter = midpoint.getMidpoint(users);
                 centerPin = dropPin(meanCenter, map, imagePano);
                 map.setCenter(meanCenter);
+                if (circle) circle.setMap(null);
+                circle = new google.maps.Circle({center:meanCenter,
+                                               radius: 8047,
+                                               fillOpacity: 0.35,
+                                               fillColor: "#93f293",
+                                               strokeOpacity: 0.5,
+                                               map: map});
+
+                // var bounds = circle.getBounds();
+                searchBox.setBounds(circle.getBounds());
                 // below is a new function which updates the ui to list all users
                 // see step1.js line 46 for more info
                 addUsersToCount(xhr.response);
@@ -275,6 +278,16 @@ function initMap() {
                 users.push(newPin);
                 meanCenter = midpoint.getMidpoint(users);
                 centerPin = dropPin(meanCenter, map, imagePano);
+                if (circle) circle.setMap(null);
+                circle = new google.maps.Circle({center:meanCenter,
+                                               radius: 8047,
+                                               fillOpacity: 0.35,
+                                               fillColor: "#93f293",
+                                               strokeOpacity: 0.5,
+                                               map: map});
+
+                // var bounds = circle.getBounds();
+                searchBox.setBounds(circle.getBounds());
                 map.setCenter(meanCenter);
             }
         };
@@ -290,6 +303,16 @@ function initMap() {
         centerPin.setMap(null);
         meanCenter = midpoint.getMidpoint(users);
         centerPin = dropPin(meanCenter, map, imagePano);
+        if (circle) circle.setMap(null);
+        circle = new google.maps.Circle({center:meanCenter,
+                                       radius: 8047,
+                                       fillOpacity: 0.35,
+                                       fillColor: "#93f293",
+                                       strokeOpacity: 0.5,
+                                       map: map});
+
+        // var bounds = circle.getBounds();
+        searchBox.setBounds(circle.getBounds());
         removeUserFromCount();
       }
     });
