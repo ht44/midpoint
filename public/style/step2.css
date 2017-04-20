@@ -1,8 +1,19 @@
 #search-box {
   border: 3px #CCC solid;
-  width: 400px;
+  width: 300px;
+  height: 25px;
 }
 
 #step-2-search {
   text-align: center;
+}
+
+#step-2-back-button {
+  border-radius: 5px;
+  float: left;
+}
+
+#step-2-button {
+  border-radius: 5px;
+  float: right;
 }

@@ -34,11 +34,19 @@ form .field {
 }
 
 
-h1, h2 {
+h1 {
   font-weight: normal;
   margin: 0;
-  padding: 0 0 10px 0;
+  padding: 50px 0 10px 0;
+  text-transform: uppercase;
 }
+
+h2 {
+    font-weight: normal;
+    margin: 0;
+    padding: 0 0 10px 0;
+}
+
 
 h4 {
   color: #1d0b71;
@@ -99,19 +107,20 @@ section label {
 
 h1.dialog {
   text-align: center;
-  font-weight: normal;
+  font-weight: 700;
+  text-transform: uppercase;
   letter-spacing: 4px;
   color: #1d0b71;
-  padding-top: 10px;
+  padding: 50px 0 10px 0;
   font-size: 20px;
 }
 
 h2.dialog {
   text-align: center;
-  font-weight: normal;
+  font-weight: 700;
   font-size: 15px;
   letter-spacing: 1px;
-  color: #a3a3a3;
+  color: #71ba7d;;
   padding: 5px;
 }
 
