@@ -87,6 +87,29 @@ section label {
   width: 150px;
 }
 
+#my-groups {
+  padding-left: 10px;
+}
+
+#all-groups {
+  list-style-type: none;
+  margin: 0px auto;
+  max-width: 500px;
+}
+
+#all-groups li {
+  clear: both;
+}
+
+#all-groups li span {
+  float: left
+}
+
+#all-groups li form {
+  float: right;
+  padding-bottom: 10px;
+}
+
 #map {
     height: calc(100% - 100px);
     width: 100%;
