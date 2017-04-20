@@ -18,6 +18,12 @@ $(document).ready(function(){
     $(this).addClass('selected')
   })
 
+  $('#group-menu a').click(event => {
+    // $('#group-menu').toggle();
+    $('#people-list').empty();
+    $('#people-count').text('0');
+  });
+
   $('#step-1-button').click(function(event) {
     event.preventDefault()
     $('.step').hide();
@@ -35,7 +41,7 @@ $(document).ready(function(){
 
 // receives users (after group is select or users are individually added) from map.ejs
 // and then updates the # of people added to display "# people added"
-function addUsers(users) {
+function addUsersToCount(users) {
   $('#people-count').text(users.length);
   // this empties the list "people-count" to start
   $('#people-list').empty();

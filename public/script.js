@@ -188,7 +188,7 @@ function initMap() {
                 map.setCenter(meanCenter);
                 // below is a new function which updates the ui to list all users
                 // see step1.js line 46 for more info
-                addUsers(xhr.response);
+                addUsersToCount(xhr.response);
             }
         };
         xhr.open('GET', `http://localhost:3000/locations/groups/${groupId}`);
