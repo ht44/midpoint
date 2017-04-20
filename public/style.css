@@ -37,7 +37,7 @@ form .field {
 h1, h2 {
   font-weight: normal;
   margin: 0;
-  padding: 0 0 20px 0;
+  padding: 0 0 10px 0;
 }
 
 h4 {
@@ -50,9 +50,13 @@ h4 {
 }
 
 input {
+  background-color: #fff;
   font-size: 12px;
   padding: 20px;
   border: none;
+  border-radius: 5px;
+  color: #000;
+  outline: none;
 }
 
 section {
@@ -74,7 +78,7 @@ section label {
 }
 
 #map {
-    height: 70vh;
+    height: calc(100% - 100px);
     width: 100%;
 }
 
@@ -82,8 +86,6 @@ section label {
   margin: auto;
   width: 50%;
   text-align: center;
-  padding-top: 50px;
-  padding-bottom: 50px;
 }
 
 #steps img {
@@ -97,26 +99,26 @@ section label {
 
 h1.dialog {
   text-align: center;
-  font-weight: 700;
+  font-weight: normal;
   letter-spacing: 4px;
   color: #1d0b71;
-  padding-bottom: 10px;
+  padding-top: 10px;
+  font-size: 20px;
 }
 
 h2.dialog {
   text-align: center;
-  font-weight: 700;
-  font-size: normal;
+  font-weight: normal;
+  font-size: 15px;
   letter-spacing: 1px;
   color: #a3a3a3;
-  padding-bottom: 50px;
+  padding: 5px;
 }
 
 
 .blue {
   width: 100%;
-  background-color: #bfe7ff;
-  padding: 80px 20px;
+  padding: 20px;
   overflow: auto;
 }
 
@@ -161,4 +163,26 @@ mvp baby
   max-width: inherit;
   background-color: white;
   list-style: none;
+}
+
+.ui-menu {
+  margin: 0;
+  max-height: 200px;
+  overflow: auto;
+  padding: 0;
+  position: absolute;
+  width: 300px;
+}
+
+.ui-menu li {
+  background-color: #232a88;
+  color: #fff;
+  cursor: pointer;
+  display: block;
+  padding: 10px 20px;
+  margin: 0;
+}
+
+.ui-menu li:hover {
+  background-color: #331db3;
 }
