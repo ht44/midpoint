@@ -105,7 +105,7 @@ router.route('/:user_id')
             )
             .del()
             .then(() => {
-                res.redirect('/users');
+                res.redirect('/auth/logout');
             });
     })
     .get(function(req, res) {

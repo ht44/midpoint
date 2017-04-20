@@ -43,8 +43,7 @@ router.route('/:group_id')
                     .select('name')
                     .where('id', req.params.group_id)
                     .then((groupStuff) => {
-                        console.log(allUserinGroup);
-                        console.log(groupStuff);
+                      console.log(allUserinGroup);
                         // console.log(allUserinGroup, groupStuff);
                         // console.log(allUserinGroup[0].group_id);
                         // console.log(`groups/${allUserinGroup[0].group_id}/edit`);

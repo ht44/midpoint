@@ -12,10 +12,10 @@
       <h2><%= message %></h2>
       <form action="auth/login" method="POST">
         <div class="field">
-          <input type="text" name="cred[email]" placeholder="Email">
+          <input type="text" name="cred[email]" placeholder="Email" required>
         </div>
         <div class="field">
-          <input type="password" name="cred[password]" placeholder="Password">
+          <input type="password" name="cred[password]" placeholder="Password" required>
         </div>
         <div class="field">
           <button class="submit">Login</button>
