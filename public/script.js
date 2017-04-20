@@ -105,6 +105,11 @@ function initMap() {
           });
     });
 
+    $('#user-id').autocomplete({
+      appendTo: '#build',
+      source: usernames
+    });
+
     var locate = new Promise((resolve, reject) => {
         geo.getCurrentPosition(position => {
             resolve({
@@ -132,7 +137,7 @@ function initMap() {
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify(location));
         // xhr.send(JSON.stringify({lat: 69.69, lng: 69.69}));
-
+    });
 
     /////////////////////////////////////////////////////////////////////////////
 
@@ -142,10 +147,7 @@ function initMap() {
     // i think if you just move the <form> around though youre fine
     //
 
-    $('#user-id').autocomplete({
-      appendTo: '#build',
-      source: usernames
-    });
+
 
     const addGroup = document.getElementById('groups');
     addGroup.addEventListener('click', (ev) => {
@@ -315,6 +317,5 @@ function initMap() {
         infowindow = null;
       }
     }
-        });
     /////////////////////////////////////////////////////////////////////////////
 }
