@@ -12,11 +12,8 @@ function initMap() {
           if (xhr.readyState === 4) {
             var parsed = JSON.parse(xhr.response);
             parsed.forEach(result => {
-              if (result.username) {
-                usernames.push(result.first + ' ' + result.last);
-              }
-            })
-            console.log(usernames);
+              usernames.push(result.first + ' ' + result.last);
+            });
           }
         }
         xhr.open('GET', 'https://midpoint-center.herokuapp.com/locations/users');
@@ -214,7 +211,6 @@ function initMap() {
         xhr.responseType = 'json';
         xhr.onreadystatechange = () => {
             if (xhr.readyState === 4) {
-              console.log(xhr.response);
               closeWindow();
               centerPin.setMap(null);
                 users.forEach(user => {
@@ -262,7 +258,6 @@ function initMap() {
     // GET user/:user_id
     const addUser = document.getElementById('add-user');
     addUser.addEventListener('click', (ev) => {
-        console.log(users);
         ev.preventDefault();
         var existing = false;
         var fullName = document.getElementById('user-id').value
@@ -277,7 +272,6 @@ function initMap() {
         xhr.responseType = 'json';
         xhr.onreadystatechange = () => {
             if (xhr.readyState === 4 && xhr.response) {
-              console.log(xhr.response);
               closeWindow();
               centerPin.setMap(null);
                 var newPin;
