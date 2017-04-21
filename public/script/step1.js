@@ -61,7 +61,6 @@ function addUserToCount(firstName, lastName) {
   peopleCount = parseInt(peopleCount, 10);
   ++peopleCount;
   $('#people-count').text(peopleCount);
-  console.log(peopleCount, typeof peopleCount);
   var person = $(document.createElement('li'));
   person.text(firstName + ' ' + lastName);
   $('#people-list').append(person);
