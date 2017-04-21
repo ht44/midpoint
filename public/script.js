@@ -1,8 +1,8 @@
 function initMap() {
 
-    var imageYrLoc = 'http://maps.google.com/mapfiles/kml/pal2/icon10.png',
-        imageGuess = 'http://maps.google.com/mapfiles/kml/pal4/icon53.png',
-        imagePano = 'http://maps.google.com/mapfiles/dir_walk_60.png';
+    var imageYrLoc = 'https://maps.google.com/mapfiles/kml/pal2/icon10.png',
+        imageGuess = 'https://maps.google.com/mapfiles/kml/pal4/icon53.png',
+        imagePano = 'https://maps.google.com/mapfiles/dir_walk_60.png';
         // imagePano = 'http://maps.google.com/mapfiles/kml/pal3/icon20.png'
 
     var geo = navigator.geolocation;
