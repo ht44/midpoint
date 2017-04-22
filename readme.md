@@ -5,6 +5,8 @@
 
 <p><strong>Welcome to Midpoint!</strong></p>
 
+https://midpoint-center.herokuapp.com/midpoint
+
 Our app solves the problem of “Where to meet up” amongst our friends/peers. When a group tries to decide on which venue they should all meet, it can become complicated by the distance each person has to travel.  Ideally everyone would like to meet up at a venue that’s convenient for them.
 
 Our project will solve this problem by taking a mean center of each location and rendering pins that link to businesses within a certain radius beyond that center.
