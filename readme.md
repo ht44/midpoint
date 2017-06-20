@@ -7,7 +7,9 @@
 
 ### by James Proett, Crystal Tate, Jeff Helwig, Noni Manzano and Hayden Turek.
 https://midpoint-center.herokuapp.com/
-
+####If you would rather not make an acccout use these credintails:
+#####Username: user@gmail.com
+#####Password: password
 
 Our Galvanize "Quarter Two Project" — "Midpoint" — solves the problem of “Where to meet up” amongst our friends/peers. When a group tries to decide on which venue they should all meet, it can become complicated by the distance each person has to travel.  Ideally everyone would like to meet up at a venue that’s convenient for them.
 
