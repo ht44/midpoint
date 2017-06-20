@@ -17,7 +17,9 @@ Our project solves this problem by taking a mean center of each location and ren
 
 Tech includes the Google Maps API, Express, Node.js, jQuery, Postgresql, EJS, and Knex.
 
-This is the math:
+Mean Center Calcuation:
+A key function of this project was calculating the centroid of the user locations. The coordinates of each user location is provided in decimal degrees of latitude and longitude. In order to calculate the average, the angular measurements must be projected on to a 3D Cartesian coordinate system based on the assumption you are dealing with a perfect sphere. An arithmetic mean of the x, y, and z values is calculated. The resulting average x,y,z location is then converted back to latitude and longitude decimal degrees. 
+
 
 ```javascript
 'use strict';
