@@ -87,4 +87,34 @@ var midpoint = (function () {
     }
 })();
 ```
-An interesting challenge that we were faced with was updating each user's location in the database without refreshing the map page. This was before we learned about single-page architecture, but we inferred that we would need AJAX and used vanilla JavaScript to dispatch the payload containing the coordinates.
+An interesting challenge that we were faced with was updating each user's location in the database without refreshing the map page. This was before we learned about single-page architecture, but we inferred that we would need AJAX and used vanilla JavaScript to dispatch the payload containing the coordinates:
+
+```javascript
+var locate = new Promise((resolve, reject) => {
+    geo.getCurrentPosition(position => {
+        resolve({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        });
+    });
+}).then(location => {
+    centerPin = dropPin(location, map, imagePano);
+    meanCenter = location;
+    myPin = dropPin(location, map, imageYrLoc);
+    myPin.lat = location.lat;
+    myPin.lng = location.lng;
+    myPin.userId = 'session';
+    users.push(myPin);
+    map.setCenter(location);
+    // ajax put @ server
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === 4) {
+        myPin.username = xhr.response;
+      }
+    }
+    xhr.open('PUT', 'https://midpoint-center.herokuapp.com/locations/users');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(location));
+});
+```
