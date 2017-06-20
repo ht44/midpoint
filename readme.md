@@ -5,21 +5,19 @@
 
 <p><strong>Welcome to Midpoint!</strong></p>
 
-https://midpoint-center.herokuapp.com/midpoint
+https://midpoint-center.herokuapp.com/
 
-Our app solves the problem of “Where to meet up” amongst our friends/peers. When a group tries to decide on which venue they should all meet, it can become complicated by the distance each person has to travel.  Ideally everyone would like to meet up at a venue that’s convenient for them.
+# Midpoint
 
-Our project will solve this problem by taking a mean center of each location and rendering pins that link to businesses within a certain radius beyond that center.
+### by James Proett, Crystal Tate, Jeff Helwig, Noni Manzano and Hayden Turek.
 
-The application will need to know the longitude and latitude for each user participating in a particular event, as well as the various query parameters for the respective Google Place search.
+Our Galvanize "Quarter Two Project" — "Midpoint" — solves the problem of “Where to meet up” amongst our friends/peers. When a group tries to decide on which venue they should all meet, it can become complicated by the distance each person has to travel.  Ideally everyone would like to meet up at a venue that’s convenient for them.
 
-Our API’s will include Google Places, Google Maps Geocoding and Google Maps.
+Our project solves this problem by taking a mean center of each location and rendering pins that link to businesses within a certain radius beyond that center.
 
-Our  technologies will include Bootstrap (or other front end framework for styling), jQuery, HTML, CSS, Postgresql, SQL, EJS, Express, Node.js, Javascript, Knex, API’s, Git and body-parser
+Tech includes the Google Maps API, Express, Node.js, jQuery, Postgresql, EJS, and Knex.
 
-Additional features will include a voting system, animated UI, built in chat client, weighting system, web socket, notification and mobile responsive.
-
-This is the math
+This is the math:
 
 ```javascript
 'use strict';
